@@ -1,0 +1,8 @@
+@import "../../core/styles/variables";
+
+.sf-tf-sidenav {
+  padding: $sf-spacing-inner-secondary;
+  width: 55px;
+  border-right: solid 3px $sf-color-primary-light;
+  box-sizing: border-box;
+}

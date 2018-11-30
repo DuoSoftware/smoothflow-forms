@@ -1,0 +1,41 @@
+@import "../../core/styles/variables";
+
+.sf-tf-topbar {
+  display: flex;
+  justify-content: start;
+  height: $sf-topbar-height;
+  border-bottom: solid 1px $sf-color-shadow-primary;
+  padding: 0 $sf-spacing-inner-primary;
+  .sf-tf-topbar-brand {
+    padding: $sf-spacing-inner-secondary 0;
+    flex: 1;
+    .sf-tf-topbar-logo {
+      display: flex;
+      align-items: center;
+      .sf-tf-topbar-logo-text {
+        display: inline-block;
+        margin-left: $sf-spacing-inner-third;
+        color: $sf-color-txt-secondary;
+        text-transform: uppercase;
+      }
+      img {
+        width: 150px;
+      }
+    }
+  }
+  .sf-tf-topbar-tools {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .sf-tf-topbar-tool {
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      background: $sf-highlighter-gray;
+      margin-left: $sf-spacing-inner-primary;
+    }
+  }
+  .sf-tf-topbar-username {
+    margin-left: $sf-spacing-inner-secondary;
+  }
+}
