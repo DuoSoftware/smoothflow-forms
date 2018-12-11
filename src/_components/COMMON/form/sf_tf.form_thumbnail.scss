@@ -1,13 +1,24 @@
 @import "../../../core/styles/variables";
 
 .sf-tf-form-thumbnail {
-  width: 30px;
+  //width: 30px;
   height: 40px;
   box-shadow: 0 1px 5px $sf-color-shadow-secondary;
   border-radius: $sf-border-radius-primary;
-  margin-bottom: $sf-spacing-inner-secondary;
+  margin-bottom: $sf-spacing-inner-third;
   align-items: center;
   justify-content: center;
   display: flex;
   cursor: pointer;
+  -webkit-transition: height $sf-animation-time;
+  -moz-transition: height $sf-animation-time;
+  -ms-transition: height $sf-animation-time;
+  -o-transition: height $sf-animation-time;
+  transition: height $sf-animation-time;
+}
+
+.sf-tf-sidenav.sf-sidenav-expanded {
+  .sf-tf-form-thumbnail {
+    height: 150px;
+  }
 }

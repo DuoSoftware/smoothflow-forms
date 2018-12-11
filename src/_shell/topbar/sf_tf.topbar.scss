@@ -6,9 +6,13 @@
   height: $sf-topbar-height;
   border-bottom: solid 1px $sf-color-shadow-primary;
   padding: 0 $sf-spacing-inner-primary;
+  position: relative;
+  //background: $sf-highlighter-gray-light;
+
   .sf-tf-topbar-brand {
     padding: $sf-spacing-inner-secondary 0;
-    flex: 1;
+    //flex: 1;
+    width: $sf-brand-width;
     .sf-tf-topbar-logo {
       display: flex;
       align-items: center;
@@ -26,16 +30,43 @@
   .sf-tf-topbar-tools {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    width: $sf-brand-width;
     .sf-tf-topbar-tool {
       width: 30px;
       height: 30px;
       border-radius: 100%;
       background: $sf-highlighter-gray;
       margin-left: $sf-spacing-inner-primary;
+      &.sf-topbar-textimg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $sf-color-primary;
+      }
     }
   }
   .sf-tf-topbar-username {
     margin-left: $sf-spacing-inner-secondary;
+  }
+  .sf-topbar-btngrp-wrap {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: center;
+    button {
+      padding: 10px 20px;
+      position: relative;
+      bottom: -1px;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      border-width: 0;
+      background: $sf-highlighter-gray-light;
+      border-width: 1px 1px 0 1px;
+
+    }
   }
 }
