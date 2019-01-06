@@ -38,54 +38,56 @@
     padding: $sf-spacing-inner-primary 0;
     .elem-1 {
       height: 40px;
-      border-radius: 23px;
+      width: 40px;
+      border-radius: 100%;
       background: #eee;
-      margin-bottom: $sf-spacing-inner-primary + 30;
-    }
-
-    .elem-2 {
-      margin-bottom: $sf-spacing-inner-primary + 30;
-      .elem-2_ {
-        display: flex;
-        span.elem-2__ {
-          width: 15px;
-          height: 15px;
-          border-radius: 100%;
-          background: #eee;
-          margin-right: $sf-spacing-inner-primary;
-        }
-        div.elem-2__ {
-          flex: 1;
-          margin-bottom: $sf-spacing-inner-primary;
-          height: 15px;
-          border-radius: 20px;
-          background: #eee;
-        }
-      }
-    }
-    .elem-3 {
+      margin-right: 0;
       margin-bottom: $sf-spacing-inner-primary;
-      .elem-3_ {
-        margin-bottom: $sf-spacing-inner-primary+10;
-        height: 10px;
-        border-radius: 10px;
-      }
-      .elem-3_:first-child {
-        background: #f3f3f3;
-      }
-      .elem-3_:nth-child(2) {
-        background: #f5f5f5;
-      }
-      .elem-3_:nth-child(3) {
-        background: #f7f7f7;
-      }
-      .elem-3_:nth-child(4) {
-        background: #f9f9f9;
-      }
-      .elem-3_:nth-child(5) {
-        background: #fafafa;
-      }
     }
+    //
+    //.elem-2 {
+    //  margin-bottom: $sf-spacing-inner-primary + 30;
+    //  .elem-2_ {
+    //    display: flex;
+    //    span.elem-2__ {
+    //      width: 15px;
+    //      height: 15px;
+    //      border-radius: 100%;
+    //      background: #eee;
+    //      margin-right: $sf-spacing-inner-primary;
+    //    }
+    //    div.elem-2__ {
+    //      flex: 1;
+    //      margin-bottom: $sf-spacing-inner-primary;
+    //      height: 15px;
+    //      border-radius: 20px;
+    //      background: #eee;
+    //    }
+    //  }
+    //}
+    //.elem-3 {
+    //  margin-bottom: $sf-spacing-inner-primary;
+    //  .elem-3_ {
+    //    margin-bottom: $sf-spacing-inner-primary+10;
+    //    height: 10px;
+    //    border-radius: 10px;
+    //  }
+    //  .elem-3_:first-child {
+    //    background: #f3f3f3;
+    //  }
+    //  .elem-3_:nth-child(2) {
+    //    background: #f5f5f5;
+    //  }
+    //  .elem-3_:nth-child(3) {
+    //    background: #f7f7f7;
+    //  }
+    //  .elem-3_:nth-child(4) {
+    //    background: #f9f9f9;
+    //  }
+    //  .elem-3_:nth-child(5) {
+    //    background: #fafafa;
+    //  }
+    //}
   }
 
   .sf-preloader-topbar {

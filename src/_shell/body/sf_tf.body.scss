@@ -1,4 +1,52 @@
+@import "../../core/styles/variables";
+
 .sf-tf-body {
+  overflow: auto;
   flex: 1;
   position: relative;
+
+  .sf-tabs-nav {
+    position: relative;
+    height: $sf-topbar-height - 10;
+    animation-fill-mode: forwards;
+    overflow: hidden;
+    #sf-tabs-slider {
+      overflow: auto;
+      height: $sf-topbar-height + 15;
+      white-space: nowrap;
+      animation-fill-mode: forwards;
+      box-sizing: content-box;
+      padding-bottom: $sf-spacing-inner-primary;
+    }
+  }
+
+  .sf-notifications {
+    width: 0;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    box-sizing: border-box;
+    padding: 0;
+    background: #ffffff;
+    -webkit-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
+    -moz-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
+    box-shadow: -3px 0 $sf-shadow-size-primary $sf-color-shadow-primary;
+    z-index: 10 ;
+    -webkit-transition: all $sf-animation-time;
+    -moz-transition: all $sf-animation-time;
+    -ms-transition: all $sf-animation-time;
+    -o-transition: all $sf-animation-time;
+    transition: all $sf-animation-time;
+
+    &.sf-notifications-opened {
+      width: $sf-sidenav-width-expanded + 100;
+      padding: $sf-spacing-inner-primary;
+      -webkit-transition: all $sf-animation-time;
+      -moz-transition: all $sf-animation-time;
+      -ms-transition: all $sf-animation-time;
+      -o-transition: all $sf-animation-time;
+      transition: all $sf-animation-time;
+    }
+  }
 }

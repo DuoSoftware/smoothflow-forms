@@ -17,7 +17,7 @@ const store = createStore(rootReducer);
 let _t = UIHelper.getSatellizerToken();
 
 // HTTP config ----------------------------------------------------//
-axios.defaults.baseURL = URLs.bot;
+axios.defaults.baseURL = URLs.base;
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + _t;
 // END - HTTP config ----------------------------------------------//
 

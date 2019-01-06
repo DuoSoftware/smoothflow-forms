@@ -3,3 +3,15 @@ export const PreloadShell = loader => ({
     type : 'PRELOAD_SHELL',
     loader
 });
+
+export const PreloadWorkspaces = loader => ({
+    category : 'UIHELPER',
+    type : 'PRELOAD_WORKSPACES',
+    loader
+});
+
+export const PreloadNotifications = loader => ({
+    category : 'UIHELPER',
+    type : 'PRELOAD_NOTIFICATIONS',
+    loader
+});

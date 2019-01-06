@@ -8,23 +8,8 @@ class Preloader extends Component {
                 return (
                     <div className="sf-preloader-sidenav">
                         <div className="elem-1"></div>
-                        <div className="elem-2">
-                            <div className="elem-2_">
-                                <span className="elem-2__"></span>
-                                <div className="elem-2__"></div>
-                            </div>
-                            <div className="elem-2_">
-                                <span className="elem-2__"></span>
-                                <div className="elem-2__"></div>
-                            </div>
-                        </div>
-                        <div className="elem-3">
-                            <div className="elem-3_"></div>
-                            <div className="elem-3_"></div>
-                            <div className="elem-3_"></div>
-                            <div className="elem-3_"></div>
-                            <div className="elem-3_"></div>
-                        </div>
+                        <div className="elem-1"></div>
+                        <div className="elem-1"></div>
                     </div>
                 )
 

@@ -4,8 +4,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
     props: {
         MuiButtonBase: {
-            disableRipple: true,
-            minWidth: '100px'
+            disableRipple: true
+        },
+         MuiTab : {
+             disabled: true
         }
     },
     transitions: {

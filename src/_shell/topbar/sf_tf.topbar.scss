@@ -33,10 +33,9 @@
     justify-content: flex-end;
     width: $sf-brand-width;
     .sf-tf-topbar-tool {
-      width: 30px;
-      height: 30px;
-      border-radius: 100%;
-      background: $sf-highlighter-gray;
+      width: $sf-button-height;
+      min-width: $sf-button-height;
+      height: $sf-button-height;
       margin-left: $sf-spacing-inner-primary;
       &.sf-topbar-textimg {
         display: flex;
@@ -45,6 +44,20 @@
         text-transform: uppercase;
         font-weight: 700;
         color: $sf-color-primary;
+        background: $sf-highlighter-gray;
+        border-radius: 100%;
+        cursor: pointer;
+      }
+      &.sf-tf-topbar-tool-selected {
+
+        padding: $sf-spacing-inner-secondary;
+        //margin: -$sf-spacing-inner-secondary + 2;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -3px 5px #ddd;
+        height: 45px;
+        margin-top: $sf-spacing-inner-third + 2;
+        //margin-bottom: $sf-spacing-inner-secondary;
+        background: #ffffff;
       }
     }
   }
@@ -68,5 +81,11 @@
       border-width: 1px 1px 0 1px;
 
     }
+  }
+  .sf-overhead-dropdown {
+    width: 200px;
+    left: auto;
+    z-index: 100000;
+    padding: 0 $sf-spacing-inner-primary;
   }
 }

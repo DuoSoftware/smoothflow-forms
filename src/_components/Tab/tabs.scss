@@ -4,13 +4,14 @@
   height: 100%;
   .sf-tab-body {
     position: relative;
-    height: calc(100% - 68px);
+    height: calc(100% - #{$sf-topbar-height + 20});
     width: 100%;
   }
   ul {
-    padding: $sf-spacing-inner-primary;
+    padding: $sf-spacing-inner-primary ($sf-spacing-inner-primary*3) $sf-spacing-inner-primary ($sf-spacing-inner-primary*3);
     list-style: none;
     margin: 0;
+
     li.sf-tab {
       display: inline-block;
       margin-right: $sf-spacing-inner-primary;
@@ -18,7 +19,7 @@
       cursor: pointer;
       a {
         display: inline-block;
-        padding: $sf-spacing-inner-secondary $sf-spacing-inner-primary+10;
+        padding: $sf-spacing-inner-secondary $sf-spacing-inner-primary+20 $sf-spacing-inner-secondary $sf-spacing-inner-primary;
         border-radius: $sf-border-radius-primary;
         background: $sf-color-primary-light;
         color: $sf-color-primary;
@@ -37,7 +38,15 @@
         -o-transition: background $sf-animation-time;
         transition: background $sf-animation-time;
       }
-
+      .sf-tab-close {
+        color: $sf-color-primary-dark;
+        position: absolute;
+        height: 15px;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
       &.active {
         a {
           background: $sf-color-primary;
@@ -59,7 +68,45 @@
           -o-transform: rotate(45deg);
           transform: rotate(45deg);
         }
+        .sf-tab-close {
+          color: #ffffff;
+        }
       }
+    }
+    .sf-tabs-scroll-left,
+    .sf-tabs-scroll-right {
+      position: absolute;
+      top: 13px;
+      z-index: 1;
+      .sf-button {
+        background: transparent;
+        .sf-icon {
+          font-size: 12px;
+        }
+      }
+      -webkit-transition: background $sf-animation-time;
+      -moz-transition: background $sf-animation-time;
+      -ms-transition: background $sf-animation-time;
+      -o-transition: background $sf-animation-time;
+      transition: background $sf-animation-time;
+      &.sf-tab-scroll-end {
+        background: transparent!important;
+        -webkit-transition: background $sf-animation-time;
+        -moz-transition: background $sf-animation-time;
+        -ms-transition: background $sf-animation-time;
+        -o-transition: background $sf-animation-time;
+        transition: background $sf-animation-time;
+      }
+    }
+    .sf-tabs-scroll-left {
+      left: 3px;
+      padding-right: $sf-spacing-inner-secondary * 2;
+      background : linear-gradient(to right, #fff, #fff, #fff, #ffffff00);
+    }
+    .sf-tabs-scroll-right {
+      right: 3px;
+      padding-left: $sf-spacing-inner-secondary * 2;
+      background : linear-gradient(to right, #ffffff00, #fff, #fff, #fff);
     }
   }
 }

@@ -1,17 +1,128 @@
 @import "../../core/styles/variables";
+@import "../../core/styles/helpers";
 
 .sf-tf-sidenav {
-  padding: $sf-spacing-inner-third;
-  width: 55px;
+  display: flex;
+  width: $sf-sidenav-width-folded + 25;
   border-right: solid 3px $sf-color-primary-light;
   box-sizing: border-box;
   position: relative;
   //overflow-y: scroll;
-  -webkit-transition: all $sf-animation-time;
-  -moz-transition: all $sf-animation-time;
-  -ms-transition: all $sf-animation-time;
-  -o-transition: all $sf-animation-time;
-  transition: all $sf-animation-time;
+  @include animation-transition(all);
+
+  .sf-sidenav-app-name {
+    margin: $sf-spacing-inner-secondary 0 $sf-spacing-inner-primary+10 0;
+  }
+  .sf-sidenav-workspaces {
+    width: $sf-sidenav-width-folded;
+    padding: $sf-spacing-inner-secondary;
+    background: $sf-highlighter-gray-light;
+    .sf-sidenav-app {
+      display: flex;
+      align-items: center;
+      margin-bottom: $sf-spacing-inner-secondary;
+      overflow-x: hidden;
+      position: relative;
+      &:hover {
+        cursor: pointer;
+        .sf-sidenav-app-prefix {
+          background: $sf-color-secondary;
+          @include animation-transition(background);
+        }
+        .sf-sidenav-app-title {
+          font-weight: 700;
+        }
+      }
+      &.sf-sidenav-app-selected {
+        padding: $sf-spacing-inner-secondary;
+        margin: -$sf-spacing-inner-secondary + 2;
+        border-radius: 100% 0 0 100%;
+        box-shadow: -5px 0 5px #ddd;
+        left: 2px;
+        margin-top: $sf-spacing-inner-secondary;
+        margin-bottom: $sf-spacing-inner-secondary;
+        background: #ffffff;
+      }
+      &:first-child {
+        &.sf-sidenav-app-selected {
+          margin-top: -8px;
+        }
+      }
+      .sf-sidenav-app-prefix {
+        position: relative;
+        z-index: 1;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        background: $sf-color-secondary-light;
+        color: #fff;
+        margin-right: $sf-spacing-inner-secondary;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 40px;
+        font-size: 17px;
+        font-weight: 300;
+        @include animation-transition(background);
+        &.sf-sap-selected {
+          background: $sf-color-secondary;
+        }
+      }
+      .sf-sidenav-app-title {
+        font-weight: 500;
+        opacity: 1;
+        position: relative;
+        left: 0;
+        @include animation-transition();
+        &.sf-sa-title-hidden {
+          @include animation-transition();
+          opacity: 0;
+          left: 20px;
+        }
+      }
+    }
+  }
+  .sf-sidenav-workspace-content {
+    padding: $sf-spacing-inner-secondary;
+    width: calc(100% - #{$sf-sidenav-width-folded + 20});
+    box-sizing: border-box;
+  }
+
+  .sf-list {
+    li {
+      padding: $sf-spacing-inner-third $sf-spacing-inner-secondary;
+      //margin: 0 (-$sf-spacing-inner-primary) ($sf-spacing-inner-primary - $sf-spacing-inner-third) (-$sf-spacing-inner-primary);
+      text-overflow: ellipsis;
+      cursor: pointer;
+      &.sf-list-active {
+        background: $sf-color-primary-light;
+        // border-left: solid 5px $sf-color-primary;
+        .sf-textbox-icon {
+          color: $sf-color-primary-dark;
+        }
+        .sf-textbox-text {
+          font-weight: 500;
+          color: $sf-color-primary-dark;
+        }
+      }
+      &.sf-formlist-divider {
+        font-weight: 600;
+        //padding-left: 0;
+        margin: $sf-spacing-inner-primary+10 0 $sf-spacing-inner-secondary 0;
+      }
+      & li:not(:last-child) {
+        margin-bottom: $sf-spacing-inner-secondary;
+      }
+    }
+  }
+  .sf-textbox-icon {
+    color: $sf-color-primary;
+  }
+  .sf-textbox-text {
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   .sf-icon-toggle {
     position: absolute;
@@ -24,11 +135,22 @@
     right: -14px;
     cursor: pointer;
   }
-
   &.sf-sidenav-expanded {
-    width: 250px;
+    width: $sf-sidenav-width-expanded;
     .sf-icon-toggle {
       padding: 3px 3px 3px 1px;
+    }
+  }
+
+  .sf-sidenav-app-content {
+    position: relative;
+    left: 0;
+    opacity: 1;
+    @include animation-transition();
+    &.sf-sa-content-hidden {
+      left: 20px;
+      opacity: 0;
+      @include animation-transition();
     }
   }
 }

@@ -1,0 +1,9 @@
+@import "./variables";
+
+@mixin animation-transition($prop: all) {
+  -webkit-transition: $prop $sf-animation-time;
+  -moz-transition: $prop $sf-animation-time;
+  -ms-transition: $prop $sf-animation-time;
+  -o-transition: $prop $sf-animation-time;
+  transition: $prop $sf-animation-time;
+}

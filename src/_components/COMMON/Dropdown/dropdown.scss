@@ -23,6 +23,7 @@
 
   &.opened {
     z-index: 1;
+    padding: $sf-spacing-inner-primary;
     opacity: 1;
     top: 16px;
     transition: all 0.2s ease-in;
