@@ -23,10 +23,10 @@ class TopBar extends Component {
     };
     // END - LOCAL dev authentication ---------------------//
 
-    signUp = () => {
+    signUp = (e) => {
         window.location.replace(URLs.auth.signup + '?r=' + window.location.href);
     };
-    signIn = () => {
+    signIn = (e) => {
         window.location.replace(URLs.auth.signin + '?r=' + window.location.href);
     };
     toggleUserCtrlPanel = (task, e) => {
@@ -125,11 +125,11 @@ class TopBar extends Component {
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
                                                 style={{'marginRight': '10px'}}
-                                                onClick={() => this.signIn()}
+                                                onClick={(e) => this.signIn(e)}
                                             >Sign In</Button>
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
-                                                onClick={() => this.signUp()}
+                                                onClick={(e) => this.signUp(e)}
                                             >Sign Up</Button>
                                         </div>
                                 }
