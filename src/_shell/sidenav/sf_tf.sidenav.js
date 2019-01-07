@@ -10,6 +10,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { KEY } from "../../core/services";
 import Wrap from "../../_components/COMMON/Wrap/_wrap";
 import {DockService} from "../../core/services/dock.service";
+import {Message} from "../../_components/COMMON/Message/message";
 
 class Sidenav extends Component {
 
@@ -243,7 +244,7 @@ class Sidenav extends Component {
                                         {/*</ul>*/}
                                     </div>
                                 </div>
-                            :   null
+                            :   <Message>No workspace is selected</Message>
                         }
                         {/*{*/}
                         {/*this.forms.map(form =>*/}

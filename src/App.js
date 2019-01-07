@@ -13,6 +13,7 @@ import Tab from "./_components/Tab/tab.widget";
 import Wrap from "./_components/COMMON/Wrap/_wrap";
 import {createMuiTheme} from "@material-ui/core/index";
 import IoTClient from './core/lib/iot-client';
+import {Message} from "./_components/COMMON/Message/message";
 
 function TabContainer(props) {
     return (
@@ -104,8 +105,6 @@ class App extends Component {
         debugger
     };
 
-
-
     render() {
         return (
             <div className="App">
@@ -114,15 +113,19 @@ class App extends Component {
                     <Sidenav/>
                     <Body>
                     {/*<Formview/>*/}
-                        <Tabs>
-                            {
-                                this.props.form.loaded_forms.map(form =>
-                                    <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
-                                        <Formview form={ form.form_link }/>
-                                    </Tab>
-                                )
-                            }
-                        </Tabs>
+                    {
+                        !this.props.form.loaded_forms.length
+                        ?   <Message>No form has been found</Message>
+                        :   <Tabs>
+                                {
+                                    this.props.form.loaded_forms.map(form =>
+                                        <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
+                                            <Formview form={ form.form_link }/>
+                                        </Tab>
+                                    )
+                                }
+                            </Tabs>
+                    }
 
                         {/*<Tabs*/}
                             {/*value={value}*/}
@@ -148,5 +151,4 @@ const mapStateToProps = state => ({
     form: state.form,
     notifications: state.notifications
 });
-
 export default connect(mapStateToProps) (App);
