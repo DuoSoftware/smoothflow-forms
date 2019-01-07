@@ -106,17 +106,13 @@ class Sidenav extends Component {
                 // debugger
                 this.props.dispatch(PreloadWorkspaces(false));
                 const ws_withurl = workspaces.data.Result;
-                ws_withurl.map(ws => {
-                   ws.structure.map(wss => {
-                       wss.Forms.map((wssf,i) => {
-                           if(i/2 == 0){
-                               wssf.Link = "https://kasun7.typeform.com/to/WHsynh";
-                           } else {
-                               wssf.Link = "https://kasun7.typeform.com/to/rLxUdm";
-                           }
-                       });
-                   });
-                });
+                // ws_withurl.map(ws => {
+                //    ws.structure.map(wss => {
+                //        wss.Forms.map((wssf,i) => {
+                //            wssf.Link = wssf.groups[0].link;
+                //        });
+                //    });
+                // });
                 this.props.dispatch(LoadWorkspaces(ws_withurl));
             })
             .catch(error => {

@@ -81,17 +81,17 @@ class App extends Component {
         /* AWS - IoT
         ================================================================== */
         let options = {
-            accessKeyId: 'ASIA2EZAZJQDND5EHUVZ',
-            secretKey: 'lOv883CCS8bn3V3TUXSH6VPAFkph2Igj52XcLI1t',
-            sessionToken: 'AgoGb3JpZ2luEDYaCXVzLWVhc3QtMSKAAjrIVy8rQtOw5JrVpj9SLnyC4+jBpdxsgnSzIuuudvfGiG40dN8heRtjoEBR6WVJqyfo8icb9eCy0QjZb6d19OriW6SP9GUscaqxFEwxVo5wMwnwUvQV2muFx2AOJAn6TTLkz/96VLj0iHCwcdF1d4H0KzX1ujKFkX7FPjzZDBs1hL4ZOAz7XgRI4+W4lGIBHqEByoi12BhJzhUZakZahCYfwSXHyU0fi99kIM1TNM84cbY/zB9HkNgLarru3dwVccRlZ0hsjL6L5b5eiG7QXkm8iME3Ks81PO+t+aLgARz4dqAvxni0O8FSUkpEZ6bN7ACTUlKYCGZnzi8m2K+yBRoqpgUIGxABGgw2OTc0NjQwODE0MTQiDHgCWrkZ7uK+c2fWFiqDBfxXKJZHSC58hmhsk9Vh7tY+rqN9zgWKlvyWb/UL6hbCV0/+ZRHaDBlorkcNKT+bB62wLCVO5YTDv36wgfXUvLPwbrPxiU32ALZBhi+ulv45RdiD8kcaj+111Z7yaWA36ZGVzHh1Ob6BKo9e3B6he+CMFVbVi6W7R7iSFJ0ILzRaX6wEFHZN+odPbs4LGPOQniJgGa1hWyRxa2w9WVJiZQudiT52C63tBLPcmArcgUdyCvny3NyVtZNibG7mS3kmzCuFMGs21nxXUbtF/wEZ4lwd9ILPcqD7UsZ7fPW4T57OBT2p6+jOGjy/iwDrBgbvvzihvrwVojWiggNnMBpqkW9fs7e2DJfiO1sIM2dsl4qqrsPjpNqJ1VELxVPZJgq6pBPOC1fBwrkoXn/DGfr4oBwDz4d94n2cQIVrXgMAvmY2Uvr+0Q8qT0Crh8HeXkyD2afbiWbRo79uPUxPf6qP/pZQx379ayBKaTo+eqLra1zk4WX8D+RagC4bug18q8aeg0QBAHQjQaaW2M44QE8sysV7Uv9lmZhIPaWyaOomvDWPr/CpfifGowFJfQ7YZMRLfltTsyRxqkMoLY/zVmLyToH9N+LGSsd+y+UF/JwLvxlMLMH/GJnPlg5OPhy7eOWk2cRELVD4RfFF7pPJafZL9iVKx+m4+QvwAqG9ybQ9/VWYX76zFavQbHX9/mYg2hTBCat0G/gLMOs7CmVHDGS7o2bZr45G7tBWy8PVB9EEPrBf4i36jrq1ESdUG/2XluApOl5cKclky5dQXyDlckbrtBo0h9QRuU9zQjVK7m/rlIuq9f8J/11DRvQzJeRUx1crsfl62tEBdt7CUNJgyM9i+boDw/IwsIzJ4QU='
+            accessKeyId: 'ASIA2EZAZJQDOVBYBZ3F',
+            secretKey: 'Yogg7WznqDCa5+cpZTY1F92rneh4r3l6Zi9lMJA4',
+            sessionToken: 'AgoGb3JpZ2luEEEaCXVzLWVhc3QtMSKAAm4ZctnGAuQ/xFOes5NX5iJQU2+LSvWpmibL8/x167pXHABGYqHrGib0QpS7bcMnFPuXU2BjYicjaWI2GzNOPA2Z/fUI6UqjrN4bbaYbfkwjm8Of6BcKD5O6J+jYpU0C0XG4bEYNJ/PFk+jJenFo+/Jk/kjDvaNB9zQC/3ZPfoSaYfhsEHspR0ntmau9bV0nGdPnPbimLT7dvublSd+TaFmn6kYEkBupJeyTZvUWZVhIJBWrTIJGwNemRRCzdMosGOF1BBtqa251HcwQqAFWVwsRi0kupFKLny+oDnZPz6+J4eF6sLOWKleyUoX6SpNoX/nnZ60NYMDMhXQv1oIusZgqpgUIJxABGgw2OTc0NjQwODE0MTQiDOUl6f750WN1aQ23TiqDBTUE4Abdy1VO/p5gTR7PalyxPGOlUZbJd+yx1PFEVO+9P/tS1F8DqeS8Adqu8BDYENb1IUOJmvRmvpeLi4/e1xxqcJ5Zbjlg1opSsw0VyzgfmYSalXffRxmHN+7eIm0B/26kqUaflhySH0SpIVYEHFoBsAiRntsFGmZzK6bpTb7BOuG0yl355y+d5HLdQicE9HslPe6TB09e7yeAvrBFOupIrxS4kr6kFwnFLblsczSwvG0V9o3pmemRYFCcFqdJ7DnCP4Zkdcp5dwPE3oYlyc6WLm+zbeEDK7QtZY+A9rrm6/KcKtgaqojDsXaC5hyKPku81BjdIkF46ES35q2OkIavwyc9JTqh76NS0SyRVcYctqKIePEI6xKrD1GVXiyWb5/l0oZYF2dYikj4rEPlDo620zS6Zl1TauM6DH/l4f7Cq7FYAgkOX/TyFIfd+rPiIBxuoU9Gj1wuMpsEEho6fYC1ixT2SzQDj1dwedaOhIop/zxXKAsZvXa/zg32XFcmTr/AzW47dV4YPom6PacuWIjT2Ndg+uO+2Dfx6kfAaJMCeMedKae0AxICFgkqojReHV/kvtvWDEeN1LH07F/tBqinJkZ5AIOZXV/O4wNcd4hwg9SIvyHSfclmN9Vf4AKt9acw+8It1YYa2QoXWvu2kFLwfRFKHJlSkvbeGqS+mgBGO4+AtotJKaIVk/jGOJQpZ7P22UqIQkmbU6HW6z9nZ283RSYJm8iyfq8GW3S/d5XbiiyFioth+0gLOpF3HCmu0mPtgPyIx8sfOtN83tQDLvmDeWEZflXp4G10y6vspVsGT0dnBKirdcotriXXVjv7j7lBe/b/YU6b1bEzOrXErm51IoEwtMbL4QU='
         };
         const _self = this;
 
         let iotClient = new IoTClient(options);
         iotClient.onConnect(function () {
             console.log('connected.');
-            iotClient.subscribe('bina');
-            // iotClient.publish('kassa', 'AAwa');
+            iotClient.subscribe('kassa');
+            iotClient.publish('kassa', "{'message':'AAwa'}");
         });
         iotClient.onMessageReceived(function(topic, message) {
             console.log(topic, message);
@@ -118,7 +118,7 @@ class App extends Component {
                             {
                                 this.props.form.loaded_forms.map(form =>
                                     <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
-                                        <Formview form={ form.Link }/>
+                                        <Formview form={ form.form_link }/>
                                     </Tab>
                                 )
                             }

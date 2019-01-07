@@ -2,102 +2,104 @@ import AwsIot from 'aws-iot-device-sdk';
 import Config from '../../config';
 
 class IoTClient {
-  constructor(options = {}) {
-    if (this.client) {
-      return this;
+    constructor(options = {}) {
+        if (this.client) {
+            return this;
+        }
+
+        this.client = null;
+
+        this.init(options);
     }
 
-    this.client = null;
+    init(options) {
+        const clientId = `smoothflow-notification-${Math.floor((Math.random() * 1000000) + 1)}`;
 
-    this.init(options);
-  }
+        this.client = AwsIot.device({
+            region: options.region || Config.awsRegion,
 
-  init(options) {
-    const clientId = `smoothflow-notification-${Math.floor((Math.random() * 1000000) + 1)}`;
+            // AWS IoT Host endpoint
+            host: options.host || Config.awsIotHost,
 
-    this.client = AwsIot.device({
-      region: options.region || Config.awsRegion,
+            // clientId created earlier
+            clientId: options.clientId || clientId,
 
-      // AWS IoT Host endpoint
-      host: options.host || Config.awsIotHost,
+            // Connect via secure WebSocket
+            protocol: options.protocol || 'wss',
 
-      // clientId created earlier
-      clientId: options.clientId || clientId,
+            // Set the maximum reconnect time to 500ms
+            baseReconnectTimeMs: options.baseReconnectTimeMs || 250,
+            maximumReconnectTimeMs: options.maximumReconnectTimeMs || 500,
 
-      // Connect via secure WebSocket
-      protocol: options.protocol || 'wss',
+            // Enable console debugging information
+            debug: (typeof options.debug === 'undefined') ? true : options.debug,
 
-      // Set the maximum reconnect time to 500ms
-      baseReconnectTimeMs: options.baseReconnectTimeMs || 250,
-      maximumReconnectTimeMs: options.maximumReconnectTimeMs || 500,
+            // AWS access key ID, secret key and session token must be
+            // initialized with empty strings
+            accessKeyId: options.accessKeyId || '',
+            secretKey: options.secretKey || '',
+            sessionToken: options.sessionToken || '',
 
-      // Enable console debugging information
-      debug: (typeof options.debug === 'undefined') ? true : options.debug,
-
-      // AWS access key ID, secret key and session token must be
-      // initialized with empty strings
-      accessKeyId: options.accessKeyId || '',
-      secretKey: options.secretKey || '',
-      sessionToken: options.sessionToken || '',
-
-      // Let redux handle subscriptions
-      autoResubscribe: (typeof options.debug === 'undefined') ? false : options.autoResubscribe,
-    });
-  }
-
-  onConnect(callback) {
-    if(this.client) {
-      this.client.on('connect', callback);
-      return this;
+            // Let redux handle subscriptions
+            autoResubscribe: (typeof options.debug === 'undefined') ? false : options.autoResubscribe,
+        });
     }
-  }
 
-  onMessageReceived(callback) {
-    if(this.client) {
-      this.client.on('message', (topic, message) => {
-          callback(topic, message.toString());
-        return this;
-      });
+    onConnect(callback) {
+        if (this.client) {
+            this.client.on('connect', callback);
+            return this;
+        }
     }
-  }
 
-  onDisconnect(callback) {
-    if(this.client) {
-      this.client.on('close', callback);
-      return this;
-    }
-  }
 
-  disconnect() {
-    if (this.client) {
-      this.client.end();
+    onMessageReceived(callback) {
+        if (this.client) {
+            this.client.on('message', (topic, message) => {
+                callback(topic, message.toString());
+                return this;
+            });
+        }
     }
-  }
 
-  /**
- * Publish message to a topic
- *
- * @param {string} topic - Topic to publish to
- * @param {string} message - JSON encoded payload to send
- */
-  publish(topic, message) {
-    if (this.client) {
-      if (typeof message === 'string')
-        this.client.publish(topic, message);
+    onDisconnect(callback) {
+        if (this.client) {
+            this.client.on('close', callback);
+            return this;
+        }
     }
-  }
 
-  subscribe(topic) {
-    if (this.client) {
-      this.client.subscribe(topic);
+    disconnect() {
+        if (this.client) {
+            this.client.end();
+        }
     }
-  }
 
-  unsubscribe(topic) {
-    if (this.client) {
-      this.client.unsubscribe(topic);
+    /**
+     * Publish message to a topic
+     *
+     * @param {string} topic - Topic to publish to
+     * @param {string} message - JSON encoded payload to send
+     */
+    publish(topic, message) {
+        if (this.client) {
+            if (typeof message === 'string')
+            // this.client.publish(topic, message);
+                this.client.publish(topic, message, {qos: 0});
+        }
     }
-  }
+
+    subscribe(topic) {
+        if (this.client) {
+            this.client.subscribe(topic);
+        }
+    }
+
+    unsubscribe(topic) {
+        if (this.client) {
+            this.client.unsubscribe(topic);
+        }
+    }
 }
 
 export default IoTClient;
