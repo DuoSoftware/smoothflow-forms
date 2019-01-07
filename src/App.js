@@ -81,9 +81,9 @@ class App extends Component {
         /* AWS - IoT
         ================================================================== */
         let options = {
-            accessKeyId: 'ASIA2EZAZJQDOVBYBZ3F',
-            secretKey: 'Yogg7WznqDCa5+cpZTY1F92rneh4r3l6Zi9lMJA4',
-            sessionToken: 'AgoGb3JpZ2luEEEaCXVzLWVhc3QtMSKAAm4ZctnGAuQ/xFOes5NX5iJQU2+LSvWpmibL8/x167pXHABGYqHrGib0QpS7bcMnFPuXU2BjYicjaWI2GzNOPA2Z/fUI6UqjrN4bbaYbfkwjm8Of6BcKD5O6J+jYpU0C0XG4bEYNJ/PFk+jJenFo+/Jk/kjDvaNB9zQC/3ZPfoSaYfhsEHspR0ntmau9bV0nGdPnPbimLT7dvublSd+TaFmn6kYEkBupJeyTZvUWZVhIJBWrTIJGwNemRRCzdMosGOF1BBtqa251HcwQqAFWVwsRi0kupFKLny+oDnZPz6+J4eF6sLOWKleyUoX6SpNoX/nnZ60NYMDMhXQv1oIusZgqpgUIJxABGgw2OTc0NjQwODE0MTQiDOUl6f750WN1aQ23TiqDBTUE4Abdy1VO/p5gTR7PalyxPGOlUZbJd+yx1PFEVO+9P/tS1F8DqeS8Adqu8BDYENb1IUOJmvRmvpeLi4/e1xxqcJ5Zbjlg1opSsw0VyzgfmYSalXffRxmHN+7eIm0B/26kqUaflhySH0SpIVYEHFoBsAiRntsFGmZzK6bpTb7BOuG0yl355y+d5HLdQicE9HslPe6TB09e7yeAvrBFOupIrxS4kr6kFwnFLblsczSwvG0V9o3pmemRYFCcFqdJ7DnCP4Zkdcp5dwPE3oYlyc6WLm+zbeEDK7QtZY+A9rrm6/KcKtgaqojDsXaC5hyKPku81BjdIkF46ES35q2OkIavwyc9JTqh76NS0SyRVcYctqKIePEI6xKrD1GVXiyWb5/l0oZYF2dYikj4rEPlDo620zS6Zl1TauM6DH/l4f7Cq7FYAgkOX/TyFIfd+rPiIBxuoU9Gj1wuMpsEEho6fYC1ixT2SzQDj1dwedaOhIop/zxXKAsZvXa/zg32XFcmTr/AzW47dV4YPom6PacuWIjT2Ndg+uO+2Dfx6kfAaJMCeMedKae0AxICFgkqojReHV/kvtvWDEeN1LH07F/tBqinJkZ5AIOZXV/O4wNcd4hwg9SIvyHSfclmN9Vf4AKt9acw+8It1YYa2QoXWvu2kFLwfRFKHJlSkvbeGqS+mgBGO4+AtotJKaIVk/jGOJQpZ7P22UqIQkmbU6HW6z9nZ283RSYJm8iyfq8GW3S/d5XbiiyFioth+0gLOpF3HCmu0mPtgPyIx8sfOtN83tQDLvmDeWEZflXp4G10y6vspVsGT0dnBKirdcotriXXVjv7j7lBe/b/YU6b1bEzOrXErm51IoEwtMbL4QU='
+            accessKeyId: '',
+            secretKey: '',
+            sessionToken: ''
         };
         const _self = this;
 
