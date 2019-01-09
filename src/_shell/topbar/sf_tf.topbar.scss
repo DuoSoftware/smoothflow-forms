@@ -33,6 +33,7 @@
     justify-content: flex-end;
     width: $sf-brand-width;
     .sf-tf-topbar-tool {
+      position: relative;
       width: $sf-button-height;
       min-width: $sf-button-height;
       height: $sf-button-height;
@@ -58,6 +59,17 @@
         margin-top: $sf-spacing-inner-third + 2;
         //margin-bottom: $sf-spacing-inner-secondary;
         background: #ffffff;
+      }
+      .sf-notif-indecator {
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background: red;
+        display: inline-block;
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        border: solid 2px #fff;
       }
     }
   }

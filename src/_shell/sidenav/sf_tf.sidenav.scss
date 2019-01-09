@@ -3,8 +3,8 @@
 
 .sf-tf-sidenav {
   display: flex;
-  width: $sf-sidenav-width-folded + 25;
-  border-right: solid 3px $sf-color-primary-light;
+  width: $sf-sidenav-width-folded + 23;
+  border-right: solid 3px $sf-highlighter-gray;
   box-sizing: border-box;
   position: relative;
   //overflow-y: scroll;
@@ -129,9 +129,9 @@
     z-index: 1;
     font-size: 9px;
     padding: 3px 1px 3px 3px;
-    color: $sf-color-primary;
-    background: $sf-color-primary-light;
-    border-radius: 5px;
+    color: $sf-color-txt-secondary;
+    background: $sf-highlighter-gray;
+    border-radius: 0 5px 5px 0;
     right: -14px;
     cursor: pointer;
   }

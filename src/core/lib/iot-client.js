@@ -52,6 +52,13 @@ class IoTClient {
         }
     }
 
+    onConnectionError(callback) {
+        if (this.client) {
+            this.client.on('error', callback);
+            return this;
+        }
+    }
+
 
     onMessageReceived(callback) {
         if (this.client) {

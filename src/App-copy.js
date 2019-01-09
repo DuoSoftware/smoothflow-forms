@@ -109,9 +109,8 @@ class App extends Component {
         });
         function getLoginKey() {
             debugger
-            const session = null;
             const currentUser = userPool.getCurrentUser();
-            return currentUser.getSession(function(err, session) {
+            currentUser.getSession(function(err, session) {
                 return session.getIdToken().getJwtToken();
             });
         }
@@ -119,16 +118,13 @@ class App extends Component {
         let login = {};
         AWS.config.region = config.awsRegion;
 
-        const session = getLoginKey();
-        debugger
-        const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
-        login[loginKey] = session;
+        const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoIdentityPoolId}`;
+        login[loginKey] = getLoginKey();
 
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
