@@ -110,10 +110,12 @@ class App extends Component {
         function getLoginKey() {
             debugger
             const session = null;
-            const currentUser = userPool.getCurrentUser();
-            return currentUser.getSession(function(err, session) {
-                return session.getIdToken().getJwtToken();
-            });
+            if(userPool) {
+                const currentUser = userPool.getCurrentUser();
+                return currentUser.getSession(function(err, session) {
+                    return session.getIdToken().getJwtToken();
+                });
+            }
         }
 
         let login = {};
