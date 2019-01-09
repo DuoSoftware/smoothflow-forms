@@ -112,9 +112,11 @@ class App extends Component {
             const session = null;
             if(userPool) {
                 const currentUser = userPool.getCurrentUser();
-                return currentUser.getSession(function(err, session) {
-                    return session.getIdToken().getJwtToken();
-                });
+                if(currentUser) {
+                    return currentUser.getSession(function(err, session) {
+                        return session.getIdToken().getJwtToken();
+                    });
+                }
             }
         }
 
