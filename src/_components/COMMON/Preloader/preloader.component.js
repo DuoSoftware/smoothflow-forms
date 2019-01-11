@@ -10,6 +10,8 @@ class Preloader extends Component {
                         <div className="elem-1"></div>
                         <div className="elem-1"></div>
                         <div className="elem-1"></div>
+                        <div className="elem-1"></div>
+                        <div className="elem-1"></div>
                     </div>
                 )
 

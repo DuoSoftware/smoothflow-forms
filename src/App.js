@@ -162,7 +162,7 @@ class App extends Component {
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
                 iotClient.onConnectionError(function () {
-                    debugger;
+                    // debugger;
                 });
                 iotClient.onMessageReceived(function(topic, message) {
                     debugger

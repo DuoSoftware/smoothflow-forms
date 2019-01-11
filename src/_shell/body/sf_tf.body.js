@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import './sf_tf.body.scss'
-import {Notification} from "../../_components/COMMON/Notification/notification.component";
 import {KEY, TaskService} from "../../core/services";
 import { connect } from 'react-redux'
-import {Preloader} from "../../_components/COMMON";
+import {Preloader, Notification, Task} from "../../_components/COMMON";
 import {ActiveForm, LoadedForms} from "../../core/actions";
 import {Message} from "../../_components/COMMON/Message/message";
 
@@ -26,7 +25,7 @@ class Body extends Component {
                             ?   <Preloader type={'BODY'} />
                             :   this.props.tasks.tasks.length
                                 ?   this.props.tasks.tasks.map(task =>
-                                        <Notification key={KEY()} item={task}/>
+                                        <Task key={KEY()} item={task}/>
                                     )
                                 :   <Message>No task has been found</Message>
                         :   this.props.notifications.notifications_open

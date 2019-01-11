@@ -271,7 +271,9 @@ class Sidenav extends Component {
                                         {/*</ul>*/}
                                     </div>
                                 </div>
-                            :   <Message>No workspace is selected</Message>
+                            :   !this.props.form.selected_workspace
+                            ?   <Message>No workspace is selected</Message>
+                            :   null
                         }
                         {/*{*/}
                         {/*this.forms.map(form =>*/}

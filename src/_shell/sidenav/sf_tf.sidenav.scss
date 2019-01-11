@@ -14,6 +14,7 @@
     margin: $sf-spacing-inner-secondary 0 $sf-spacing-inner-primary+10 0;
   }
   .sf-sidenav-workspaces {
+    position: relative;
     width: $sf-sidenav-width-folded;
     padding: $sf-spacing-inner-secondary;
     background: $sf-highlighter-gray-light;
@@ -83,7 +84,6 @@
     }
   }
   .sf-sidenav-workspace-content {
-    padding: $sf-spacing-inner-secondary;
     width: calc(100% - #{$sf-sidenav-width-folded + 20});
     box-sizing: border-box;
   }
@@ -139,6 +139,9 @@
     width: $sf-sidenav-width-expanded;
     .sf-icon-toggle {
       padding: 3px 3px 3px 1px;
+    }
+    .sf-sidenav-workspace-content {
+      padding: $sf-spacing-inner-primary;
     }
   }
 
