@@ -35,14 +35,27 @@
   .sf-preloader-sidenav {
     width: 80%;
     height: 100%;
-    padding: $sf-spacing-inner-primary 0;
+    padding: $sf-spacing-inner-secondary 0;
     .elem-1 {
       height: 40px;
       width: 40px;
       border-radius: 100%;
-      background: #eee;
-      margin-right: 0;
-      margin-bottom: $sf-spacing-inner-primary;
+      margin: 0 auto 15px auto;
+      &:first-child {
+        background: #eee;
+      }
+      &:nth-child(2) {
+        background: #eeeeee90;
+      }
+      &:nth-child(3) {
+        background: #eeeeee80;
+      }
+      &:nth-child(4) {
+        background: #eeeeee60;
+      }
+      &:nth-child(5) {
+        background: #eeeeee30;
+      }
     }
     //
     //.elem-2 {
@@ -92,10 +105,11 @@
 
   .sf-preloader-topbar {
     position: absolute;
-    width: 180px;
+    width: 200px;
     right: 0;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     .elem-1_ {
       display: inline-block;
       width: 20px;
@@ -106,8 +120,8 @@
     }
     .elem-2_ {
       display: inline-block;
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
       border-radius: 100%;
       background: #eee;
     }

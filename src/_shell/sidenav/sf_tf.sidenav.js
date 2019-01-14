@@ -3,13 +3,15 @@ import './sf_tf.sidenav.scss'
 import { connect } from 'react-redux'
 import {FormThumbnail, List, Preloader, Textbox} from "../../_components/COMMON";
 import {
-    ActiveForm, LoadedForms, LoadForm, LoadWorkspaces, PreloadWorkspaces,
+    ActiveForm, InjectNotification, LoadedForms, LoadForm, LoadWorkspaces, PreloadWorkspaces,
     SelectedWorkspace
 } from "../../core/actions";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { KEY } from "../../core/services";
 import Wrap from "../../_components/COMMON/Wrap/_wrap";
 import {DockService} from "../../core/services/dock.service";
+import {Message} from "../../_components/COMMON/Message/message";
+import IoTClient from "../../core/lib/iot-client";
 
 class Sidenav extends Component {
 
@@ -97,6 +99,7 @@ class Sidenav extends Component {
                 url: 'https://kasun7.typeform.com/to/rLxUdm'
             }
         ];
+        this._self = this;
     };
 
     componentDidMount() {
@@ -106,17 +109,13 @@ class Sidenav extends Component {
                 // debugger
                 this.props.dispatch(PreloadWorkspaces(false));
                 const ws_withurl = workspaces.data.Result;
-                ws_withurl.map(ws => {
-                   ws.structure.map(wss => {
-                       wss.Forms.map((wssf,i) => {
-                           if(i/2 == 0){
-                               wssf.Link = "https://kasun7.typeform.com/to/WHsynh";
-                           } else {
-                               wssf.Link = "https://kasun7.typeform.com/to/rLxUdm";
-                           }
-                       });
-                   });
-                });
+                // ws_withurl.map(ws => {
+                //    ws.structure.map(wss => {
+                //        wss.Forms.map((wssf,i) => {
+                //            wssf.Link = wssf.groups[0].link;
+                //        });
+                //    });
+                // });
                 this.props.dispatch(LoadWorkspaces(ws_withurl));
             })
             .catch(error => {
@@ -156,20 +155,45 @@ class Sidenav extends Component {
         let fgs = [...this.props.form.loaded_forms];
         let alreary_loaded = false;
         if (fgs.length) {
-            debugger
             fgs.map(g => {
                 if (g.form_name === form.form_name) {
-                    // g.selected = true;
-                    // const i = fgs.indexOf(g);
                     alreary_loaded = true;
-                } else {
-                    // g.selected = false;
-                }
+                };
             });
         } else {
             this.props.dispatch(ActiveForm(form, 0));
         }
-        if(!alreary_loaded) fgs.push(form);
+        if(!alreary_loaded) {
+            fgs.push(form);
+            let iotClient = new IoTClient(this.props.notifications.tokens);
+            iotClient.onConnect(function () {
+                debugger
+                const id = form.form_link.split('/').pop();
+                iotClient.subscribe('forms/' + id);
+                const data = {
+                    "topic": "forms/" + id,
+                    "data": {
+                        "name" : form.form_name,
+                        "data" : id
+                    }
+                };
+                // iotClient.publish('forms/' + id, JSON.stringify(data));
+            });
+            const _self = this;
+            iotClient.onMessageReceived(function(topic, message) {
+                debugger
+                const parsed = JSON.parse(message.replace(/\r?\n|\r/, ''));
+                let active_form = _self.props.form.active_form;
+                const active_form_link = _self.props.form.active_form.form_link;
+                const _i = active_form_link.lastIndexOf("/");
+                const link_prefix = active_form_link.substring(0, _i+1);
+                active_form.form_link = link_prefix + parsed.data;
+                _self.props.dispatch(ActiveForm(active_form, null));
+            });
+            iotClient.onConnectionError(function () {
+                debugger;
+            });
+        }
         this.props.dispatch(ActiveForm(form, null));
         this.props.dispatch(LoadedForms(fgs));
     };
@@ -247,6 +271,8 @@ class Sidenav extends Component {
                                         {/*</ul>*/}
                                     </div>
                                 </div>
+                            :   !this.props.form.selected_workspace
+                            ?   <Message>No workspace is selected</Message>
                             :   null
                         }
                         {/*{*/}
@@ -267,6 +293,6 @@ class Sidenav extends Component {
 const mapStateToProps = state => ({
     form: state.form,
     uihelper: state.uihelper,
-
+    notifications: state.notifications
 });
 export default connect(mapStateToProps) (Sidenav);

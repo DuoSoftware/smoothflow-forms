@@ -109,30 +109,22 @@ class App extends Component {
         });
         function getLoginKey() {
             debugger
-            const session = null;
-            if(userPool) {
-                const currentUser = userPool.getCurrentUser();
-                if(currentUser) {
-                    return currentUser.getSession(function(err, session) {
-                        return session.getIdToken().getJwtToken();
-                    });
-                }
-            }
+            const currentUser = userPool.getCurrentUser();
+            currentUser.getSession(function(err, session) {
+                return session.getIdToken().getJwtToken();
+            });
         }
 
         let login = {};
         AWS.config.region = config.awsRegion;
 
-        const session = getLoginKey();
-        debugger
-        const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
-        login[loginKey] = session;
+        const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoIdentityPoolId}`;
+        login[loginKey] = getLoginKey();
 
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
@@ -162,7 +154,7 @@ class App extends Component {
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
                 iotClient.onConnectionError(function () {
-                    // debugger;
+                    debugger;
                 });
                 iotClient.onMessageReceived(function(topic, message) {
                     debugger

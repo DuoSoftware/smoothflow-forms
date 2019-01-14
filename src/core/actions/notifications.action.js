@@ -9,3 +9,15 @@ export const InjectNotification = notif => ({
     type: 'INJECT_NOTIFICATION',
     notif
 });
+
+export const OpenGlobalNotifConnection = connection => ({
+    category: 'NOTIFICATION',
+    type: 'GLOBAL_CONNECTION',
+    connection
+});
+
+export const Tokens = tokens => ({
+    category: 'NOTIFICATION',
+    type: 'TOKENS',
+    tokens
+});
