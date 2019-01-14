@@ -1,0 +1,62 @@
+@import "../../../core/styles/variables";
+
+.sf-task {
+  padding: $sf-spacing-inner-secondary;
+  border-radius: $sf-border-radius-primary;
+  //display: flex;
+  align-items: flex-start;
+  background: $sf-highlighter-gray-light;
+  margin-bottom: $sf-spacing-inner-primary;
+  .sf-task-header {
+    display: flex;
+    align-items: center;
+    .sf-task-prefix {
+      display: flex;
+      width: $sf-button-height - $sf-spacing-inner-primary;
+      height: $sf-button-height - $sf-spacing-inner-primary;
+      background: $sf-color-primary-dark;
+      border-radius: $sf-border-radius-primary;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 500;
+      align-items: center;
+      justify-content: center;
+      margin-right: $sf-spacing-inner-secondary;
+    }
+    .sf-task-title {
+      flex: 1;
+      font-weight: 500;
+    }
+    .sf-task-status {
+      //flex: 1;
+      font-weight: 600;
+      font-size: 12px;
+      display: inline-block;
+      padding: $sf-spacing-inner-third - 3 $sf-spacing-inner-third + 2;
+      background: $sf-color-secondary;
+      border-radius: $sf-border-radius-primary;
+      color: #ffffff;
+    }
+  }
+  .sf-task-body {
+    color: $sf-color-txt-secondary;
+  }
+  .sf-task-footer {
+    padding: $sf-spacing-inner-third;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .sf-task-assignee {
+      flex: 1;
+    }
+    .sf-task-assign-to {
+      flex: 1;
+    }
+  }
+
+  &:hover {
+    //box-shadow: 0 1px $sf-shadow-size-secondary $sf-color-shadow-secondary;
+    background: $sf-highlighter-gray;
+    cursor: pointer;
+  }
+}
