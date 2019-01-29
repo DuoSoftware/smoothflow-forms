@@ -7,6 +7,7 @@
   border-right: solid 3px $sf-highlighter-gray;
   box-sizing: border-box;
   position: relative;
+  z-index: 20;
   //overflow-y: scroll;
   @include animation-transition(all);
 
@@ -43,6 +44,7 @@
         margin-top: $sf-spacing-inner-secondary;
         margin-bottom: $sf-spacing-inner-secondary;
         background: #ffffff;
+        z-index: 2;
       }
       &:first-child {
         &.sf-sidenav-app-selected {
@@ -85,7 +87,9 @@
   }
   .sf-sidenav-workspace-content {
     width: calc(100% - #{$sf-sidenav-width-folded + 20});
+    box-shadow: -2px 0px 3px #eee;
     box-sizing: border-box;
+    z-index: 1;
   }
 
   .sf-list {

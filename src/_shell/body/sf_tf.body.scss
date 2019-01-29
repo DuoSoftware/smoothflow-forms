@@ -48,5 +48,9 @@
       -o-transition: all $sf-animation-time;
       transition: all $sf-animation-time;
     }
+
+    &.sf-notifications-full {
+      width: 100%;
+    }
   }
 }

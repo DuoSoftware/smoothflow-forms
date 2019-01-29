@@ -191,7 +191,7 @@ class Sidenav extends Component {
                 _self.props.dispatch(ActiveForm(active_form, null));
             });
             iotClient.onConnectionError(function () {
-                debugger;
+                // debugger;
             });
         }
         this.props.dispatch(ActiveForm(form, null));

@@ -9,3 +9,9 @@ export const InjectTask = task => ({
     type: 'TASK_INJECT',
     task
 });
+
+export const TasksFullwidth = state => ({
+    category: 'TASK',
+    type: 'TASK_FULLWIDTH',
+    state
+});

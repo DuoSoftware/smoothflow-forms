@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {ActiveForm} from "../../core/actions";
 import {createStore} from "redux";
 import rootReducer from "../../core/reducers";
+import IoTClient from "../../core/lib/iot-client";
 
 const store = createStore(rootReducer);
 
@@ -53,7 +54,7 @@ class Tabs extends Component {
     componentDidUpdate() {
         const form = this.props.form.active_form;
         const i = this.props.form.loaded_forms.indexOf(form);
-        // debugger
+        debugger
         if(this.state.activeTabIndex !== i) {
             // debugger
             this.handleTabClick(i);
@@ -66,8 +67,36 @@ class Tabs extends Component {
             activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
         });
         const forms = this.props.form.loaded_forms;
-        this.props.dispatch(ActiveForm(forms[tabIndex], null));
+        const form = forms[tabIndex];
+        this.props.dispatch(ActiveForm(form, null));
+
+        if (form.type === "Dropdown") {
+            this.lockTask(form);
+        }
     }
+
+    iotClient = new IoTClient(this.props.notifications.tokens);
+    lockTask(form) {
+        debugger
+        this.iotClient.onConnect(function () {
+            debugger
+            const id = form.Link.split('/').pop();
+            this.iotClient.subscribe('tasks');
+            const data = {
+                "topic": "tasks",
+                "data": {
+                    "type" : "task",
+                    "status" : "LOCKED",
+                    "name" : form.form_name,
+                    "id" : id
+                }
+            };
+            this.iotClient.publish('tasks', JSON.stringify(data));
+        });
+        this.iotClient.onConnectionError(function () {
+            // debugger;
+        });
+    };
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
@@ -133,7 +162,8 @@ class Tabs extends Component {
 }
 
 const mapStateToProps = state => ({
-    form: state.form
+    form: state.form,
+    notifications: state.notifications
 });
 
 export default ( connect(mapStateToProps) )(Tabs);

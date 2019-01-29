@@ -108,7 +108,6 @@ class App extends Component {
             })
         });
         function getLoginKey() {
-            debugger
             const session = null;
             if(userPool) {
                 const currentUser = userPool.getCurrentUser();
@@ -124,7 +123,6 @@ class App extends Component {
         AWS.config.region = config.awsRegion;
 
         const session = getLoginKey();
-        debugger
         const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
         login[loginKey] = session;
 
@@ -132,7 +130,6 @@ class App extends Component {
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
@@ -158,7 +155,7 @@ class App extends Component {
                 iotClient.onConnect(function () {
                     debugger;
                     console.log('connected.');
-                    iotClient.subscribe('forms/5c33520cd07f814355190371');
+                    iotClient.subscribe('tasks');
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
                 iotClient.onConnectionError(function () {

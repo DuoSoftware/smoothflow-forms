@@ -69,6 +69,12 @@
   &.sf-button-small {
     padding: $sf-spacing-inner-third $sf-spacing-inner-secondary;
   }
+  &.sf-button-xsmall {
+    padding: $sf-spacing-inner-third $sf-spacing-inner-secondary;
+    font-size: 12px;
+    font-weight: normal;
+    height: 30px;
+  }
   &.sf-button-clear {
     background: transparent;
     color: $sf-color-secondary;

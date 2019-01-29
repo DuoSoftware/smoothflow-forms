@@ -1,7 +1,11 @@
 const tasks = {
     tasks_open : false,
     tasks_loading : false,
-    tasks : []
+    task_fullwidth : false,
+    tasks : {
+        favourites: [],
+        general: []
+    }
 };
 
 const TaskReducer = (state = tasks, action) => {
@@ -19,11 +23,15 @@ const TaskReducer = (state = tasks, action) => {
             };
 
         case 'TASK_INJECT' :
-            // const tasks = [...state.tasks];
-            // tasks.push(action.task);
             return {
                 ...state,
                 'tasks' : action.task
+            };
+
+        case 'TASK_FULLWIDTH' :
+            return {
+                ...state,
+                'task_fullwidth' : action.state
             };
 
         default :

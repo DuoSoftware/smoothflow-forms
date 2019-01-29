@@ -2,6 +2,7 @@ import React from 'react'
 import './task.scss'
 import {ActiveForm, LoadedForms, OpenTasks} from "../../../core/actions";
 import { connect } from 'react-redux';
+import {Button} from "../";
 
 const selectTask = (e, notif, props) => {
     let fgs = [...props.form.loaded_forms];
@@ -27,11 +28,20 @@ const selectTask = (e, notif, props) => {
     props.dispatch(LoadedForms(fgs));
 };
 
+const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
+
 const Task = (props) => {
     return (
-        <div className="sf-task" onClick={(e) => selectTask(e, props.item, props)}>
+        <div className={`sf-task${props.tasks.task_fullwidth ? ' sf-task-full' : ''}`} onClick={(e) => selectTask(e, props.item, props)}>
             <div className="sf-task-header">
-                <div className="sf-task-prefix">
+                <div className="sf-task-prefix" style={{'background' : getRandomColor()}}>
                     <span>T</span>
                 </div>
                 <div className="sf-task-title">{ props.item.task_name }</div>
@@ -49,13 +59,17 @@ const Task = (props) => {
                 <div className="sf-task-assign-to">
                     <span>To: <b>{ props.item.assigner }</b></span>
                 </div>
+                <div className={`sf-task-favourite${props.item.favourite ? ' sf-task-favourite-on' : ''}`}>
+                    <i className="material-icons">star{props.item.favourite ? '' : '_border'}</i>
+                </div>
             </div>
         </div>
     )
 };
 
 const mapStateToProps = state => ({
-    form: state.form
+    form: state.form,
+    tasks: state.tasks
 });
 
 const PageHederToExport = connect(mapStateToProps) (Task);
