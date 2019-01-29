@@ -94,7 +94,7 @@ class Tabs extends Component {
             this.iotClient.publish('tasks', JSON.stringify(data));
         });
         this.iotClient.onConnectionError(function () {
-            // debugger;
+            debugger;
         });
     };
 

@@ -159,13 +159,13 @@ class App extends Component {
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
                 iotClient.onConnectionError(function () {
-                    // debugger;
+                    debugger;
                 });
-                iotClient.onMessageReceived(function(topic, message) {
-                    debugger
-                    console.log(topic, message);
-                    _self.props.dispatch(InjectNotification(message));
-                });
+                // iotClient.onMessageReceived(function(topic, message) {
+                //     debugger
+                //     console.log(topic, message);
+                //     _self.props.dispatch(InjectNotification(message));
+                // });
                 /* --------------------------------------------------------------- */
             }
         });
