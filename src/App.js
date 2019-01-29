@@ -208,7 +208,8 @@ class App extends Component {
 const mapStateToProps = state => ({
     uihelper : state.uihelper,
     form: state.form,
-    notifications: state.notifications
+    notifications: state.notifications,
+    tasks: state.tasks
 });
 export default connect(mapStateToProps) (App);
 
