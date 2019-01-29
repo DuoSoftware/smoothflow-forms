@@ -81,7 +81,7 @@ class Tabs extends Component {
         iotClient.onConnect(function () {
             debugger
             const id = form.Link.split('/').pop();
-            this.iotClient.subscribe('tasks');
+            iotClient.subscribe('tasks');
             const data = {
                 "topic": "tasks",
                 "data": {
@@ -91,9 +91,9 @@ class Tabs extends Component {
                     "id" : id
                 }
             };
-            this.iotClient.publish('tasks', JSON.stringify(data));
+            iotClient.publish('tasks', JSON.stringify(data));
         });
-        this.iotClient.onConnectionError(function () {
+        iotClient.onConnectionError(function () {
             debugger;
         });
     };
