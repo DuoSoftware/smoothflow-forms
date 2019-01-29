@@ -38,7 +38,7 @@ const TaskReducer = (state = tasks, action) => {
         case 'TASK_IOTCLIENT' :
             return {
                 ...state,
-                'iotClient' : action.client
+                'IotClient' : action.client
             };
 
         default :
