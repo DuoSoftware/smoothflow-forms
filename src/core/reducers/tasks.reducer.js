@@ -2,7 +2,7 @@ const tasks = {
     tasks_open : false,
     tasks_loading : false,
     task_fullwidth : false,
-    iotClient : null,
+    IotClient : null,
     tasks : {
         favourites: [],
         general: []

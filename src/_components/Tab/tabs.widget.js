@@ -86,7 +86,7 @@ class Tabs extends Component {
                 "id" : form._id
             }
         };
-        this.props.tasks.iotClient.publish('tasks', JSON.stringify(data));
+        this.props.tasks.IotClient.publish('tasks', JSON.stringify(data));
     };
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
