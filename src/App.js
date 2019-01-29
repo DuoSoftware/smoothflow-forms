@@ -6,7 +6,7 @@ import Sidenav from "./_shell/sidenav/sf_tf.sidenav";
 import Body from "./_shell/body/sf_tf.body";
 import Formview from "./_containers/formview/sf_tf.formview.container";
 import {
-    InjectNotification, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, Tokens,
+    InjectNotification, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, TasksIotClient, Tokens,
     User
 } from "./core/actions";
 import {KEY, UIHelper, UserService} from "./core/services";
@@ -150,21 +150,21 @@ class App extends Component {
                 let iotClient = new IoTClient(options);
 
                 // Globally exposing the connection to use inside the entire app
-                // this.props.dispatch(OpenGlobalNotifConnection(iotClient));
+                this.props.dispatch(TasksIotClient(iotClient));
 
                 // Retrieve global connection
-                // const gIotClient = this.props.notifications.global_notif_connection;
+                const gIotClient = this.props.tasks.IotClient;
 
-                iotClient.onConnect(function () {
+                gIotClient.onConnect(function () {
                     debugger;
                     console.log('connected.');
-                    iotClient.subscribe('tasks');
+                    gIotClient.subscribe('tasks');
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
-                iotClient.onConnectionError(function () {
+                gIotClient.onConnectionError(function () {
                     // debugger;
                 });
-                iotClient.onMessageReceived(function(topic, message) {
+                gIotClient.onMessageReceived(function(topic, message) {
                     debugger
                     console.log(topic, message);
                     _self.props.dispatch(InjectNotification(message));

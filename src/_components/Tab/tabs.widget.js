@@ -75,28 +75,19 @@ class Tabs extends Component {
         // }
     }
 
-    // lockTask(form) {
-    //     debugger
-    //     let iotClient = new IoTClient(this.props.notifications.tokens);
-    //     iotClient.onConnect(function () {
-    //         debugger
-    //         const id = form.Link.split('/').pop();
-    //         iotClient.subscribe('tasks');
-    //         const data = {
-    //             "topic": "tasks",
-    //             "data": {
-    //                 "type" : "task",
-    //                 "status" : "LOCKED",
-    //                 "name" : form.form_name,
-    //                 "id" : id
-    //             }
-    //         };
-    //         iotClient.publish('tasks', JSON.stringify(data));
-    //     });
-    //     iotClient.onConnectionError(function () {
-    //         debugger;
-    //     });
-    // };
+    lockTask(form) {
+        this.props.tasks.IotClient.subscribe('tasks');
+        const data = {
+            "topic": "tasks",
+            "data": {
+                "type" : "task",
+                "status" : "LOCKED",
+                "name" : form.form_name,
+                "id" : form._id
+            }
+        };
+        this.props.tasks.iotClient.publish('tasks', JSON.stringify(data));
+    };
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
@@ -163,7 +154,8 @@ class Tabs extends Component {
 
 const mapStateToProps = state => ({
     form: state.form,
-    notifications: state.notifications
+    notifications: state.notifications,
+    tasks: state.tasks
 });
 
 export default ( connect(mapStateToProps) )(Tabs);

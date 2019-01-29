@@ -15,3 +15,9 @@ export const TasksFullwidth = state => ({
     type: 'TASK_FULLWIDTH',
     state
 });
+
+export const TasksIotClient = client => ({
+    category: 'TASK',
+    type: 'TASK_IOTCLIENT',
+    client
+});

@@ -2,6 +2,7 @@ const tasks = {
     tasks_open : false,
     tasks_loading : false,
     task_fullwidth : false,
+    iotClient : null,
     tasks : {
         favourites: [],
         general: []
@@ -32,6 +33,12 @@ const TaskReducer = (state = tasks, action) => {
             return {
                 ...state,
                 'task_fullwidth' : action.state
+            };
+
+        case 'TASK_IOTCLIENT' :
+            return {
+                ...state,
+                'iotClient' : action.client
             };
 
         default :
