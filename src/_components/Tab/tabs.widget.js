@@ -70,33 +70,33 @@ class Tabs extends Component {
         const form = forms[tabIndex];
         this.props.dispatch(ActiveForm(form, null));
 
-        if (form.type === "Dropdown") {
-            this.lockTask(form);
-        }
+        // if (form.type === "Dropdown") {
+        //     this.lockTask(form);
+        // }
     }
 
-    lockTask(form) {
-        debugger
-        let iotClient = new IoTClient(this.props.notifications.tokens);
-        iotClient.onConnect(function () {
-            debugger
-            const id = form.Link.split('/').pop();
-            iotClient.subscribe('tasks');
-            const data = {
-                "topic": "tasks",
-                "data": {
-                    "type" : "task",
-                    "status" : "LOCKED",
-                    "name" : form.form_name,
-                    "id" : id
-                }
-            };
-            iotClient.publish('tasks', JSON.stringify(data));
-        });
-        iotClient.onConnectionError(function () {
-            debugger;
-        });
-    };
+    // lockTask(form) {
+    //     debugger
+    //     let iotClient = new IoTClient(this.props.notifications.tokens);
+    //     iotClient.onConnect(function () {
+    //         debugger
+    //         const id = form.Link.split('/').pop();
+    //         iotClient.subscribe('tasks');
+    //         const data = {
+    //             "topic": "tasks",
+    //             "data": {
+    //                 "type" : "task",
+    //                 "status" : "LOCKED",
+    //                 "name" : form.form_name,
+    //                 "id" : id
+    //             }
+    //         };
+    //         iotClient.publish('tasks', JSON.stringify(data));
+    //     });
+    //     iotClient.onConnectionError(function () {
+    //         debugger;
+    //     });
+    // };
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
