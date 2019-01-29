@@ -78,7 +78,7 @@ class Tabs extends Component {
     lockTask(form) {
         debugger
         let iotClient = new IoTClient(this.props.notifications.tokens);
-        this.iotClient.onConnect(function () {
+        iotClient.onConnect(function () {
             debugger
             const id = form.Link.split('/').pop();
             this.iotClient.subscribe('tasks');
