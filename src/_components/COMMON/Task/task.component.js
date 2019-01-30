@@ -99,6 +99,7 @@ class Task extends Component {
                             }
                         });
                         this.props.dispatch(InjectTask(allTasks));
+                        this.lockTask(item);
                     }
                 })
                 .catch(erres => {
@@ -107,16 +108,16 @@ class Task extends Component {
         }
     }
 
-    lockTask(form) {
+    lockTask(task) {
         debugger
         const data = {
             "topic": "tasks",
             "data": {
                 "type" : "task",
                 "status" : "STARTED",
-                "name" : form.form_name,
+                "name" : task.task_name,
                 "assignee" : this.props.user.username,
-                "_id" : form._id
+                "_id" : task._id
             }
         };
         this.props.tasks.IotClient.publish('tasks', JSON.stringify(data));
