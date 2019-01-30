@@ -12,8 +12,8 @@ const TaskService = {
     makeFavourite: (id) => {
         return axios.get(URLs.tasks.toggleTaskFavourite + id);
     },
-    updateTask: (id) => {
-        return axios.get(URLs.tasks.updateTask + id);
+    updateTask: (id, item) => {
+        return axios.put(URLs.tasks.updateTask + id, item);
     }
 };
 

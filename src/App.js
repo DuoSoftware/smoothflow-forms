@@ -6,7 +6,7 @@ import Sidenav from "./_shell/sidenav/sf_tf.sidenav";
 import Body from "./_shell/body/sf_tf.body";
 import Formview from "./_containers/formview/sf_tf.formview.container";
 import {
-    InjectNotification, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, TasksIotClient, Tokens,
+    InjectNotification, InjectTask, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, TasksIotClient, Tokens,
     User
 } from "./core/actions";
 import {KEY, UIHelper, UserService} from "./core/services";
@@ -165,9 +165,19 @@ class App extends Component {
                     debugger
                     console.log(topic, message);
                     if (topic === 'tasks') {
-
+                        const _task = JSON.parse(message);
+                        let _allTasks = [..._self.props.tasks.all_tasks];
+                        _allTasks.map(_t => {
+                            if(_t._id === _task._id) {
+                                if(_t.assignee !== _self.props.user.username) {
+                                    _t.locked = true;
+                                }
+                            }
+                        });
+                        _self.props.dispatch(InjectTask(_allTasks));
+                    } else {
+                        _self.props.dispatch(InjectNotification(message));
                     }
-                    _self.props.dispatch(InjectNotification(message));
                 });
                 /* --------------------------------------------------------------- */
             }

@@ -3,7 +3,7 @@ import './sf_tf.body.scss'
 import {KEY, TaskService} from "../../core/services";
 import { connect } from 'react-redux'
 import {Preloader, Notification, Task, Button} from "../../_components/COMMON";
-import {ActiveForm, LoadedForms, PreloadNotifications, TasksFullwidth} from "../../core/actions";
+import {ActiveForm, InjectNotification, LoadedForms, PreloadNotifications, TasksFullwidth} from "../../core/actions";
 import {Message} from "../../_components/COMMON/Message/message";
 import Wrap from "../../_components/COMMON/Wrap/_wrap";
 import {Divider} from "../../_components/COMMON/Divider/divider.component";
