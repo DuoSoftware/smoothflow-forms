@@ -83,8 +83,16 @@ class Task extends Component {
         debugger
         if (item) {
             let payload = {
+                "task_name": item.task_name,
+                "form_name" : item.form_name,
+                "form_id" : item.form_id,
+                "assigner" : item.assigner,
                 "assignee" : this.props.user.username,
                 "review_status": "STARTED",
+                "raw_data": {
+                    "Link" : item.raw_data.Link
+                },
+                "description": item.description
             };
 
             TaskService.updateTask(item._id, payload)
