@@ -165,16 +165,7 @@ class App extends Component {
                     debugger
                     console.log(topic, message);
                     if (topic === 'tasks') {
-                        const _task = JSON.parse(message);
-                        let _allTasks = [..._self.props.tasks.all_tasks];
-                        _allTasks.map(_t => {
-                            if(_t._id === _task._id) {
-                                if(_t.assignee !== _self.props.user.username) {
-                                    _t.locked = true;
-                                }
-                            }
-                        });
-                        _self.props.dispatch(InjectTask(_allTasks));
+                        this.exportTaskNotifications(message);
                     } else {
                         _self.props.dispatch(InjectNotification(message));
                     }
@@ -183,6 +174,19 @@ class App extends Component {
             }
         });
     };
+
+    exportTaskNotifications (message) {
+        const _task = JSON.parse(message);
+        let _allTasks = [...this.props.tasks.all_tasks];
+        _allTasks.map(_t => {
+            if(_t._id === _task.data._id) {
+                if(_t.assignee !== this.props.user.username) {
+                    _t.locked = true;
+                }
+            }
+        });
+        this.props.dispatch(InjectTask(_allTasks));
+    }
 
     loadSelectedForm = (e, i) => {
         debugger
