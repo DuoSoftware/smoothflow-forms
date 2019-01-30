@@ -44,7 +44,7 @@ class Task extends Component {
                         debugger;
                     });
             } else if ($(e.target).hasClass('sf-checkout-button')) {
-                if (notif) this.updateState(notif);
+                if (notif) this.updateState(e, notif);
             } else {
                 let fgs = [...this.props.form.loaded_forms];
                 let alreary_loaded = false;
