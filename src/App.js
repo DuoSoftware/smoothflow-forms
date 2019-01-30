@@ -108,7 +108,6 @@ class App extends Component {
             })
         });
         function getLoginKey() {
-            debugger
             const session = null;
             if(userPool) {
                 const currentUser = userPool.getCurrentUser();
@@ -124,7 +123,6 @@ class App extends Component {
         AWS.config.region = config.awsRegion;
 
         const session = getLoginKey();
-        debugger
         const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
         login[loginKey] = session;
 
@@ -132,7 +130,6 @@ class App extends Component {
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
@@ -167,6 +164,9 @@ class App extends Component {
                 gIotClient.onMessageReceived(function(topic, message) {
                     debugger
                     console.log(topic, message);
+                    if (topic === 'tasks') {
+
+                    }
                     _self.props.dispatch(InjectNotification(message));
                 });
                 /* --------------------------------------------------------------- */

@@ -31,13 +31,20 @@ class Preloader extends Component {
                         <span className="sf-preloader-inner"></span>
                     </span>
                 )
+
+            case 'INLINE' :
+                return (
+                    <span className="sf-preloader-outer">
+                        <span className="sf-preloader-inner"></span>
+                    </span>
+                )
             
             default : return
         }
     }
     render() {
         return (
-            <div className="sf-preloader">
+            <div className={`sf-preloader${this.props.type == 'INLINE' ? ' sf-preloader-inlne' : ''}`}>
                 {
                     this.getPreloaderBody(this.props.type)
                 }

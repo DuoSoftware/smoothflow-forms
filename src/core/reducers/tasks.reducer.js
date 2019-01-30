@@ -1,15 +1,19 @@
+import {PreloadNotifications} from "../actions";
+
 const tasks = {
     tasks_open : false,
     tasks_loading : false,
     task_fullwidth : false,
     IotClient : null,
-    tasks : {
+    all_tasks : [],
+    tasks: {
         favourites: [],
         general: []
     }
 };
 
 const TaskReducer = (state = tasks, action) => {
+
     switch (action.type) {
         case 'TASK_OPEN' :
             return {
@@ -24,9 +28,18 @@ const TaskReducer = (state = tasks, action) => {
             };
 
         case 'TASK_INJECT' :
+            let _tasks = {
+                favourites: [],
+                general: []
+            };
+            action.task.map(t => {
+                if(t.is_favorite) _tasks.favourites.push(t);
+                else _tasks.general.push(t);
+            });
             return {
                 ...state,
-                'tasks' : action.task
+                'all_tasks' : action.task,
+                'tasks' : _tasks
             };
 
         case 'TASK_FULLWIDTH' :

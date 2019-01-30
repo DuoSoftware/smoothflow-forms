@@ -12,7 +12,9 @@ const URLs = {
         getAllWorkspaces : 'https://w6pnu017gf.execute-api.us-east-1.amazonaws.com/Prod/docks'
     },
     tasks : {
-        getAllTasks : 'https://ckxbbu9vp9.execute-api.us-east-1.amazonaws.com/Prod/tasks'
+        getAllTasks : 'https://ckxbbu9vp9.execute-api.us-east-1.amazonaws.com/Prod/tasks',
+        toggleTaskFavourite : 'https://ckxbbu9vp9.execute-api.us-east-1.amazonaws.com/Prod/taskaddtofavorites/',
+        updateTask : 'https://ckxbbu9vp9.execute-api.us-east-1.amazonaws.com/Prod/task/'
     }
 };
 

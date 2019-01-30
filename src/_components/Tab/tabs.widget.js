@@ -54,7 +54,6 @@ class Tabs extends Component {
     componentDidUpdate() {
         const form = this.props.form.active_form;
         const i = this.props.form.loaded_forms.indexOf(form);
-        debugger
         if(this.state.activeTabIndex !== i) {
             // debugger
             this.handleTabClick(i);
@@ -63,31 +62,14 @@ class Tabs extends Component {
 
     // Toggle currently active tab
     handleTabClick(tabIndex) {
+        debugger
         this.setState({
             activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
         });
         const forms = this.props.form.loaded_forms;
         const form = forms[tabIndex];
         this.props.dispatch(ActiveForm(form, null));
-
-        // if (form.type === "Dropdown") {
-        //     this.lockTask(form);
-        // }
     }
-
-    lockTask(form) {
-        this.props.tasks.IotClient.subscribe('tasks');
-        const data = {
-            "topic": "tasks",
-            "data": {
-                "type" : "task",
-                "status" : "LOCKED",
-                "name" : form.form_name,
-                "id" : form._id
-            }
-        };
-        this.props.tasks.IotClient.publish('tasks', JSON.stringify(data));
-    };
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
