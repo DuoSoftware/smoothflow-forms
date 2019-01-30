@@ -76,6 +76,7 @@ class TopBar extends Component {
                     tasks.data.Result.map((task, i) => {
                         if(task.raw_data) task.Link = task.raw_data.Link;
                         task.type = "task";
+                        task.locked = false;
 
                         if(task.assignee !== this.props.user.username) {
                             if (task.review_status === 'STARTED') {

@@ -217,6 +217,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
     uihelper : state.uihelper,
+    user : state.user,
     form: state.form,
     notifications: state.notifications,
     tasks: state.tasks
