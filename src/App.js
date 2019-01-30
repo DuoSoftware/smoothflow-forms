@@ -165,7 +165,7 @@ class App extends Component {
                     debugger
                     console.log(topic, message);
                     if (topic === 'tasks') {
-                        this.exportTaskNotifications(message);
+                        _self.exportTaskNotifications(message);
                     } else {
                         _self.props.dispatch(InjectNotification(message));
                     }
