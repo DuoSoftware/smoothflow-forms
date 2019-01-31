@@ -96,6 +96,13 @@
       }
     }
   }
+  &.sf-task-locked,
+  &.sf-task-locked:hover{
+    opacity: 0.3;
+    background: #eee;
+    cursor: pointer;
+    pointer-events: none;
+  }
 
   &:hover {
     //box-shadow: 0 1px $sf-shadow-size-secondary $sf-color-shadow-secondary;

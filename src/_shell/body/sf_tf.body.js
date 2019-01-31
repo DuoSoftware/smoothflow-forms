@@ -11,6 +11,7 @@ import IoTClient from "../../core/lib/iot-client";
 import _ from "lodash";
 
 class Body extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -45,20 +46,20 @@ class Body extends Component {
                             ?   <Preloader type={'BODY'} />
                             :   this.props.tasks.all_tasks.length
                                 ?   <Wrap>
-                                    { this.props.tasks.tasks.favourites.length ? <h4>Favourites</h4> : null }
+                                        { this.props.tasks.tasks.favourites.length ? <h4>Favourites</h4> : null }
 
-                                    {
-                                        this.props.tasks.tasks.favourites.map(task =>
-                                            <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                                        )
-                                    }
-                                    <Divider></Divider>
-                                    {
-                                        this.props.tasks.tasks.general.map(task =>
-                                            <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                                        )
-                                    }
-                                </Wrap>
+                                        {
+                                            this.props.tasks.tasks.favourites.map(task =>
+                                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
+                                            )
+                                        }
+                                        <Divider></Divider>
+                                        {
+                                            this.props.tasks.tasks.general.map(task =>
+                                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
+                                            )
+                                        }
+                                    </Wrap>
                                 :   <Message>No task has been found</Message>
 
                         :

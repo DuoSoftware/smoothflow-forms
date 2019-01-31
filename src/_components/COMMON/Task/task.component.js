@@ -102,6 +102,7 @@ class Task extends Component {
                         allTasks.map(task => {
                             if(task._id === data._id) {
                                 task.review_status = data.review_status;
+                                task.assignee = data.assignee;
                             }
                         });
                         this.props.dispatch(InjectTask(allTasks));
@@ -141,7 +142,7 @@ class Task extends Component {
 
     render () {
         return (
-            <div className={`sf-task${this.props.tasks.task_fullwidth ? ' sf-task-full' : ''} ${this.props.tasks.locked ? ' sf-task-locked' : ''}`}
+            <div className={`sf-task${this.props.tasks.task_fullwidth ? ' sf-task-full' : ''} ${this.props.item.locked ? ' sf-task-locked' : ''}`}
                  onClick={(e) => this.selectTask(e, this.props.item)}>
                 <div className="sf-task-header">
                     <div className="sf-task-prefix" style={{'background': this.getRandomColor()}}>
