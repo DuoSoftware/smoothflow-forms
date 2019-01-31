@@ -33,9 +33,15 @@
       font-size: 12px;
       display: inline-block;
       padding: $sf-spacing-inner-third - 3 $sf-spacing-inner-third + 2;
-      background: $sf-color-secondary;
+      background: $sf-color-status-private;
       border-radius: $sf-border-radius-primary;
       color: #ffffff;
+      &.task-INQUEUE {
+        background: $sf-color-status-private;
+      }
+      &.task-STARTED {
+        background: $sf-color-status-pending;
+      }
     }
   }
   .sf-task-body {

@@ -220,14 +220,14 @@ class App extends Component {
                         !this.props.form.loaded_forms.length
                             ?   <Message>No form has been found</Message>
                             :   <Tabs>
-                                {
-                                    this.props.form.loaded_forms.map(form =>
-                                        <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
-                                            <Formview form={ form.form_link }/>
-                                        </Tab>
-                                    )
-                                }
-                            </Tabs>
+                                    {
+                                        this.props.form.loaded_forms.map(form =>
+                                            <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
+                                                { form }
+                                            </Tab>
+                                        )
+                                    }
+                                </Tabs>
                     }
                     </Body>
                 </div>

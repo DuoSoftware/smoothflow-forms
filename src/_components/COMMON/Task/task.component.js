@@ -150,7 +150,7 @@ class Task extends Component {
                     </div>
                     <div className="sf-task-title">{this.props.item.task_name}</div>
                     { this.props.item.locked ? <i className="material-icons">lock</i> : null}
-                    <div className="sf-task-status">{this.props.item.review_status}</div>
+                    <div className={`sf-task-status${' task-'+ this.props.item.review_status.toUpperCase()}`}>{this.props.item.review_status}</div>
                 </div>
                 <div className="sf-task-body">
                     <div className="sf-task-desc">
