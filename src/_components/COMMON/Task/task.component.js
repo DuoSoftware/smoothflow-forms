@@ -159,7 +159,7 @@ class Task extends Component {
                         this.props.item.review_status !== 'STARTED' && this.props.item.assignee !== this.props.user.username
                         ?   <div className="sf-task-assign-to">
                                 <Button className="sf-checkout-button sf-button sf-button-xsmall sf-button-secondary">
-                                    Check out
+                                    Start
                                 </Button>
                             </div>
                         :   null

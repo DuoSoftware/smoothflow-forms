@@ -19,6 +19,8 @@ import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
 import config from './config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
+import toastr from 'react-redux-toastr';
+import ReduxToastr from 'react-redux-toastr'
 
 function TabContainer(props) {
     return (
@@ -164,16 +166,26 @@ class App extends Component {
                 gIotClient.onMessageReceived(function(topic, message) {
                     debugger
                     console.log(topic, message);
-                    if (topic === 'tasks') {
-                        _self.exportTaskNotifications(message);
-                    } else {
-                        _self.props.dispatch(InjectNotification(message));
-                    }
+                    const msg = JSON.parse(message);
+                    this.notificationsManager(topic, msg);
                 });
                 /* --------------------------------------------------------------- */
             }
         });
     };
+
+    notificationsManager (topic, message) {
+        switch(topic) {
+            case 'tasks' :
+                this.exportTaskNotifications(message);
+                break;
+
+            case 'notification' :
+                this.props.dispatch(InjectNotification(message));
+                toastr.info("Task Update", message.assignee + " has changed the status of " + message.name + " to " + message.status);
+                break;
+        }
+    }
 
     exportTaskNotifications (message) {
         const _task = JSON.parse(message);
@@ -214,6 +226,14 @@ class App extends Component {
                     }
                     </Body>
                 </div>
+                <ReduxToastr
+                    timeOut={4000}
+                    newestOnTop={false}
+                    preventDuplicates
+                    position="top-right"
+                    transitionIn="fadeIn"
+                    transitionOut="fadeOut"
+                    closeOnToastrClick/>
             </div>
         );
     }

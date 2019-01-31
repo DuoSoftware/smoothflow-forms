@@ -1,3 +1,5 @@
+import toastr from 'react-redux-toastr';
+
 const notifications = {
     notifications_open : false,
     notifications: [],
