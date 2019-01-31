@@ -80,7 +80,6 @@ class Task extends Component {
     };
 
     updateState (e, item) {
-        debugger
         if (item) {
             let payload = {
                 "task_name": item.task_name,
@@ -97,7 +96,6 @@ class Task extends Component {
 
             TaskService.updateTask(item._id, payload)
                 .then(res => {
-                    debugger
                     if (res.data.IsSuccess) {
                         const data = res.data.Result;
                         const allTasks = this.props.tasks.all_tasks;
@@ -117,7 +115,6 @@ class Task extends Component {
     }
 
     lockTask(task) {
-        debugger
         const data = {
             "topic": "tasks",
             "data": {
@@ -128,7 +125,18 @@ class Task extends Component {
                 "_id" : task._id
             }
         };
+        const notif = {
+            "topic": "tasks",
+            "data": {
+                "type" : "notification",
+                "status" : "STARTED",
+                "name" : task.task_name,
+                "assignee" : this.props.user.username,
+                "_id" : task._id
+            }
+        };
         this.props.tasks.IotClient.publish('tasks', JSON.stringify(data));
+        this.props.tasks.IotClient.publish('tasks', JSON.stringify(notif));
     };
 
     render () {

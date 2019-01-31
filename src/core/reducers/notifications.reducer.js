@@ -18,8 +18,8 @@ const NotificationReducer = (state = notifications, action) => {
         case 'INJECT_NOTIFICATION' :
             // debugger
             const notifs = [...state.notifications];
-            const nonewline = action.notif.replace(/\r?\n|\r/, '');
-            debugger
+            // const nonewline = action.notif.replace(/\r?\n|\r/, '');
+            // debugger
             // const parsed = {
             //     "task_name": "Notification",
             //     "form_name" : "",
@@ -30,7 +30,7 @@ const NotificationReducer = (state = notifications, action) => {
             //     "raw_data": {},
             //     "description": JSON.parse(nonewline).message
             // };
-            notifs.push(JSON.parse(nonewline));
+            notifs.push(action.notif);
             return {
                 ...state,
                 'notifications' : notifs
