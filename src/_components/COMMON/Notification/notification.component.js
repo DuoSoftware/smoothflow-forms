@@ -10,7 +10,7 @@ const Notification = (props) => {
                 <span>N</span>
             </div>
             <div className="sf-notification-body">
-                <div className="sf-notification-title">{ props.item.task_name }</div>
+                <div className="sf-notification-title">{ props.item.name }</div>
                 <div className="sf-notification-desc">
                     <p>{ props.item.description }</p>
                 </div>

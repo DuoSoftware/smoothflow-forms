@@ -6,7 +6,7 @@ import Sidenav from "./_shell/sidenav/sf_tf.sidenav";
 import Body from "./_shell/body/sf_tf.body";
 import Formview from "./_containers/formview/sf_tf.formview.container";
 import {
-    InjectNotification, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, Tokens,
+    InjectNotification, InjectTask, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, TasksIotClient, Tokens,
     User
 } from "./core/actions";
 import {KEY, UIHelper, UserService} from "./core/services";
@@ -19,6 +19,8 @@ import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
 import config from './config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
+import toastr from 'react-redux-toastr';
+import ReduxToastr from 'react-redux-toastr'
 
 function TabContainer(props) {
     return (
@@ -108,7 +110,6 @@ class App extends Component {
             })
         });
         function getLoginKey() {
-            debugger
             const session = null;
             if(userPool) {
                 const currentUser = userPool.getCurrentUser();
@@ -124,7 +125,6 @@ class App extends Component {
         AWS.config.region = config.awsRegion;
 
         const session = getLoginKey();
-        debugger
         const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
         login[loginKey] = session;
 
@@ -132,7 +132,6 @@ class App extends Component {
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
@@ -150,29 +149,61 @@ class App extends Component {
                 let iotClient = new IoTClient(options);
 
                 // Globally exposing the connection to use inside the entire app
-                // this.props.dispatch(OpenGlobalNotifConnection(iotClient));
+                this.props.dispatch(TasksIotClient(iotClient));
 
                 // Retrieve global connection
-                // const gIotClient = this.props.notifications.global_notif_connection;
+                const gIotClient = this.props.tasks.IotClient;
 
-                iotClient.onConnect(function () {
+                gIotClient.onConnect(function () {
                     debugger;
                     console.log('connected.');
-                    iotClient.subscribe('forms/5c33520cd07f814355190371');
+                    gIotClient.subscribe('tasks');
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
-                iotClient.onConnectionError(function () {
+                gIotClient.onConnectionError(function () {
                     // debugger;
                 });
-                iotClient.onMessageReceived(function(topic, message) {
+                gIotClient.onMessageReceived(function(topic, message) {
                     debugger
                     console.log(topic, message);
-                    _self.props.dispatch(InjectNotification(message));
+                    const msg = JSON.parse(message);
+                    _self.notificationsManager(topic, msg);
                 });
                 /* --------------------------------------------------------------- */
             }
         });
     };
+
+    notificationsManager (topic, message) {
+        switch(message.data.type) {
+            case 'task' :
+                this.exportTaskNotifications(message, this.props.user.username);
+                break;
+
+            case 'notification' :
+                const notif = {
+                    name: message.data.name,
+                    description: message.data.assignee + " has changed the status of " + message.data.name + " to " + message.data.status
+                }
+                this.props.dispatch(InjectNotification(notif));
+                // toastr.info("Task Update", message.data.assignee + " has changed the status of " + message.data.name + " to " + message.data.status);
+                break;
+        }
+    }
+
+    exportTaskNotifications (message, username) {
+        debugger
+        let _allTasks = [...this.props.tasks.all_tasks];
+        _allTasks.map(_t => {
+            if(_t._id === message.data._id) {
+                if(_t.assignee !== username) {
+                    debugger
+                    _t.locked = true;
+                }
+            }
+        });
+        this.props.dispatch(InjectTask(_allTasks));
+    }
 
     loadSelectedForm = (e, i) => {
         debugger
@@ -187,8 +218,8 @@ class App extends Component {
                     <Body>
                     {
                         !this.props.form.loaded_forms.length
-                        ?   <Message>No form has been found</Message>
-                        :   <Tabs>
+                            ?   <Message>No form has been found</Message>
+                            :   <Tabs>
                                 {
                                     this.props.form.loaded_forms.map(form =>
                                         <Tab key={KEY()} iconClassName={'icon-class-0'} linkClassName={'link-class-0'} title={form.form_name}>
@@ -200,6 +231,14 @@ class App extends Component {
                     }
                     </Body>
                 </div>
+                <ReduxToastr
+                    timeOut={4000}
+                    newestOnTop={false}
+                    preventDuplicates
+                    position="top-right"
+                    transitionIn="fadeIn"
+                    transitionOut="fadeOut"
+                    closeOnToastrClick/>
             </div>
         );
     }
@@ -207,7 +246,10 @@ class App extends Component {
 
 const mapStateToProps = state => ({
     uihelper : state.uihelper,
+    user : state.user,
     form: state.form,
-    notifications: state.notifications
+    notifications: state.notifications,
+    tasks: state.tasks
 });
 export default connect(mapStateToProps) (App);
+

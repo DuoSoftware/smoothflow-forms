@@ -13,6 +13,19 @@
     z-index: 10000;
     background: #fff;
     transition: all $sf-animation-time;
+  &.sf-preloader-inlne {
+    position: static;
+    background: transparent;
+    margin: 0 10px;
+    .sf-preloader-outer {
+      width: 20px;
+      height: 20px;
+      .sf-preloader-inner {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
   .sf-preloader-outer {
     width: 40px;
     height: 40px;

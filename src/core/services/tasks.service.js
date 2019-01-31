@@ -8,6 +8,12 @@ const TaskService = {
     },
     getUserSettings: (url) => {
         return axios.get(url)
+    },
+    makeFavourite: (id) => {
+        return axios.get(URLs.tasks.toggleTaskFavourite + id);
+    },
+    updateTask: (id, item) => {
+        return axios.put(URLs.tasks.updateTask + id, item);
     }
 };
 

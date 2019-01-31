@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {ActiveForm} from "../../core/actions";
 import {createStore} from "redux";
 import rootReducer from "../../core/reducers";
+import IoTClient from "../../core/lib/iot-client";
 
 const store = createStore(rootReducer);
 
@@ -53,7 +54,6 @@ class Tabs extends Component {
     componentDidUpdate() {
         const form = this.props.form.active_form;
         const i = this.props.form.loaded_forms.indexOf(form);
-        // debugger
         if(this.state.activeTabIndex !== i) {
             // debugger
             this.handleTabClick(i);
@@ -62,11 +62,13 @@ class Tabs extends Component {
 
     // Toggle currently active tab
     handleTabClick(tabIndex) {
+        debugger
         this.setState({
             activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
         });
         const forms = this.props.form.loaded_forms;
-        this.props.dispatch(ActiveForm(forms[tabIndex], null));
+        const form = forms[tabIndex];
+        this.props.dispatch(ActiveForm(form, null));
     }
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
@@ -133,7 +135,9 @@ class Tabs extends Component {
 }
 
 const mapStateToProps = state => ({
-    form: state.form
+    form: state.form,
+    notifications: state.notifications,
+    tasks: state.tasks
 });
 
 export default ( connect(mapStateToProps) )(Tabs);

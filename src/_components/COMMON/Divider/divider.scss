@@ -1,0 +1,8 @@
+@import "../../../core/styles/variables.scss";
+
+.sf-divider {
+  width: 100%;
+  height: 1px;
+  background: $sf-highlighter-gray;
+  margin-bottom: $sf-spacing-inner-primary;
+}

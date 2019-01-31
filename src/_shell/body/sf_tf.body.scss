@@ -33,6 +33,7 @@
     -moz-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
     box-shadow: -3px 0 $sf-shadow-size-primary $sf-color-shadow-primary;
     z-index: 10 ;
+    overflow-y: scroll;
     -webkit-transition: all $sf-animation-time;
     -moz-transition: all $sf-animation-time;
     -ms-transition: all $sf-animation-time;
@@ -47,6 +48,10 @@
       -ms-transition: all $sf-animation-time;
       -o-transition: all $sf-animation-time;
       transition: all $sf-animation-time;
+    }
+
+    &.sf-notifications-full {
+      width: 100%;
     }
   }
 }
