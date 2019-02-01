@@ -252,7 +252,7 @@ class Sidenav extends Component {
                                                         {
                                                             div.Forms.map(form =>
                                                                 <li key={KEY()} onClick={(e)=>this.selectForm(e, form)} className={`${form.active ? 'sf-list-active' : null}`}>
-                                                                    <Textbox icon={form.type !== 'divider' ? 'code' : ''} size="17">
+                                                                    <Textbox icon={form.type !== 'divider' && form.icon !== "" ? form.icon : form.icon == "" ? 'help' : ''} size="17">
                                                                         <span>{ form.type === 'divider' ? form.divider_name : form.form_name }</span>
                                                                     </Textbox>
                                                                 </li>
