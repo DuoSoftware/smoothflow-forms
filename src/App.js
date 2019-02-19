@@ -17,12 +17,12 @@ import Wrap from "./_components/COMMON/Wrap/_wrap";
 import IoTClient from './core/lib/iot-client';
 import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
-import config from './config'
+import config from './config/index'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import { toastr } from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
-// import openSocket from 'socket.io-client';
-// const socket = openSocket('http://smoothflow.herokuapp.com');
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://smoothflow.herokuapp.com');
 
 function TabContainer(props) {
     return (
@@ -185,9 +185,9 @@ class App extends Component {
         });
 
         //Smoothflow Webchat connection
-        // socket.on("connect", () => {
-        //     console.log("socket connected")
-        // });
+        socket.on("connect", () => {
+            console.log("socket connected")
+        });
     };
 
     notificationsManager (topic, message) {
