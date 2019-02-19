@@ -1,6 +1,7 @@
 @import "./core/styles/variables";
 @import "./core/assets/icons/icons.css";
 @import "../node_modules/material-design-icons/iconfont/material-icons.css";
+//@import "./core/lib/angular-material-icons.css";
 @import '../node_modules/react-redux-toastr/src/styles/index';
 
 body,
@@ -63,6 +64,8 @@ iframe{ position: absolute; left:0; right:0; bottom:0; top:0; border:0 };
 
 .sf-tf-formview {
   display: none;
+  height: 100%;
+  background: #ffffff;
   &.sf-formview-show {
     display: block;
   }

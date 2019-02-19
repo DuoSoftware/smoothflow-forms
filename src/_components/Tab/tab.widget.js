@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './tabs.scss';
 import { connect } from 'react-redux'
-import {LoadedForms} from "../../core/actions";
+import {LoadedForms, RemoveLoadedForm} from "../../core/actions";
 
 class Tab extends Component {
     closeTab = (e, tab) => {
         let loaded_tabs = [...this.props.form.loaded_forms];
-        loaded_tabs.splice(tab, 1);
-        this.props.dispatch(LoadedForms(loaded_tabs));
+        // loaded_tabs.splice(tab, 1);
+        this.props.dispatch(RemoveLoadedForm(loaded_tabs, tab));
     };
 
     render() {

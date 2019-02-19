@@ -4,6 +4,7 @@
   height: 100%;
   .sf-tab-body {
     position: relative;
+    background: #ffffff;
     height: calc(100% - #{$sf-topbar-height + 20});
     width: 100%;
   }

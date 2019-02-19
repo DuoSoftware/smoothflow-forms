@@ -27,6 +27,10 @@
       flex: 1;
       font-weight: 500;
     }
+    & > i.material-icons {
+      font-size: 19px;
+      margin-right: $sf-spacing-inner-third;
+    }
     .sf-task-status {
       //flex: 1;
       font-weight: 600;
