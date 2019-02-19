@@ -185,9 +185,9 @@ class App extends Component {
         });
 
         //Smoothflow Webchat connection
-        socket.on("connect", () => {
-            console.log("socket connected")
-        });
+        // socket.on("connect", () => {
+        //     console.log("socket connected")
+        // });
     };
 
     notificationsManager (topic, message) {
