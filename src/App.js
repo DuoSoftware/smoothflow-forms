@@ -88,10 +88,6 @@ class App extends Component {
             this.props.dispatch(LoadForm('https://kasun7.typeform.com/to/' + formID));
         }
 
-        socket.on("connect", () => {
-            console.log("socket connected")
-        })
-
         /* AWS - IoT
         ================================================================== */
         const tokens = AWS.config.credentials;
@@ -186,6 +182,11 @@ class App extends Component {
                 });
                 /* --------------------------------------------------------------- */
             }
+        });
+
+        //Smoothflow Webchat connection
+        socket.on("connect", () => {
+            console.log("socket connected")
         });
     };
 
