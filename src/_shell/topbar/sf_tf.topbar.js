@@ -138,7 +138,7 @@ class TopBar extends Component {
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
                                                 style={{'marginRight': '10px'}}
-                                                onClick={(e) => this.localSignIn(e)}
+                                                onClick={(e) => this.signIn(e)}
                                             >Sign In</Button>
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
