@@ -17,7 +17,7 @@ import Wrap from "./_components/COMMON/Wrap/_wrap";
 import IoTClient from './core/lib/iot-client';
 import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
-import config from './_convo_config'
+import config from './_components/_convo_config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 
 function TabContainer(props) {
@@ -28,7 +28,7 @@ function TabContainer(props) {
     );
 }
 
-class App extends Component {
+class App_copy extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -202,4 +202,4 @@ const mapStateToProps = state => ({
     form: state.form,
     notifications: state.notifications
 });
-export default connect(mapStateToProps) (App);
+export default connect(mapStateToProps) (App_copy);

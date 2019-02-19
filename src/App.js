@@ -21,7 +21,7 @@ import config from './config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import { toastr } from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
-import openSocket from 'socket.io-client';
+// import openSocket from 'socket.io-client';
 // const socket = openSocket('http://smoothflow.herokuapp.com');
 
 function TabContainer(props) {
