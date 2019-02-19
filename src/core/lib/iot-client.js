@@ -1,5 +1,5 @@
 import AwsIot from 'aws-iot-device-sdk';
-import Config from '../../config';
+import Config from '../../_convo_config';
 
 class IoTClient {
     constructor(options = {}) {

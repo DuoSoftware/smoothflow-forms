@@ -17,7 +17,7 @@ import Wrap from "./_components/COMMON/Wrap/_wrap";
 import IoTClient from './core/lib/iot-client';
 import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
-import config from './config/config'
+import config from './config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import { toastr } from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
@@ -172,7 +172,7 @@ class App extends Component {
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
                 });
                 gIotClient.onConnectionError(function () {
-                    // debugger;
+                    debugger;
                 });
                 gIotClient.onMessageReceived(function(topic, message) {
                     debugger

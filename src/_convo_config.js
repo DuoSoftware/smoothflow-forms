@@ -7,5 +7,4 @@ if (env === 'development') {
 } 
 else{
   process.env.CLIENT_URL = "http://smoothflow.herokuapp.com";
-
 }
