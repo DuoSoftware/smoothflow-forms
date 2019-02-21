@@ -2,6 +2,7 @@ import React from 'react'
 import './notification.scss'
 import {ActiveForm, LoadedForms, OpenTasks, RemoveNotification} from "../../../core/actions";
 import { connect } from 'react-redux';
+import {Button} from "../";
 
 const Notification = (props) => {
     const markAsRead = (notif) => {
