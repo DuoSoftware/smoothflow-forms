@@ -66,4 +66,18 @@ iframe{ position: absolute; left:0; right:0; bottom:0; top:0; border:0 };
   &.sf-formview-show {
     display: block;
   }
+  &.sf-tf-appview {
+    height: 100%;
+  }
+}
+.sf-empty-convo {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-weight: 300;
+    color: #ddd;
+  }
 }
