@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const Notification = (props) => {
     const markAsRead = (e, notif) => {
-        props.dispatch(RemoveNotification(notif._id));
+        props.dispatch(RemoveNotification(notif));
     };
 
     return (
@@ -15,8 +15,8 @@ const Notification = (props) => {
             </div>
             <div className="sf-notification-body">
                 <div className="sf-notification-title">
-                    <span>{ props.item.name }</span>
-                    <i className="material-icons" onClick={ (e) => markAsRead(e, props.item) }>visibility_off</i>
+                    <span style={ {'flex':'1'} }>{ props.item.name }</span>
+                    <i className="material-icons" onClick={ (e) => markAsRead(e, props.item) } style={ {'color':'#aaa'} }>visibility_off</i>
                 </div>
                 <div className="sf-notification-desc">
                     <p>{ props.item.description }</p>

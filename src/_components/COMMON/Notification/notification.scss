@@ -25,6 +25,8 @@
     .sf-notification-title {
       font-weight: 500;
       margin-bottom: $sf-spacing-inner-secondary;
+      display: flex;
+      align-items: center;
     }
     .sf-notification-desc {
       p {
