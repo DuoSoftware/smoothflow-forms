@@ -67,9 +67,12 @@ class Body extends Component {
                         ?   this.props.uihelper._preload_notif_
                             ?   <Preloader type={'BODY'} />
                             :   this.props.notifications.notifications.length
-                                ?   this.props.notifications.notifications.map(task =>
-                                        <Notification key={KEY()} item={task}/>
-                                    )
+                                ?   this.props.notifications.notifications.map(task => {
+                                    this.props.notifications.notifications_hidden.map(notifhid => {
+                                        if(notifhid !== task._id)
+                                            return <Notification key={KEY()} item={task}/>
+                                    })
+                                })
                                 :   <Message>No notification has been found</Message>
                         :   null
                     }
