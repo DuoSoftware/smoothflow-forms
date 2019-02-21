@@ -16,7 +16,7 @@ const Notification = (props) => {
             <div className="sf-notification-body">
                 <div className="sf-notification-title">
                     <span>{ props.item.name }</span>
-                    <i className="material-icons" onClick={ markAsRead.bind(e, props.item) }>visibility_off</i>
+                    <i className="material-icons" onClick={ (e) => markAsRead(e, props.item) }>visibility_off</i>
                 </div>
                 <div className="sf-notification-desc">
                     <p>{ props.item.description }</p>
