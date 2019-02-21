@@ -2,10 +2,9 @@ import React from 'react'
 import './notification.scss'
 import {ActiveForm, LoadedForms, OpenTasks, RemoveNotification} from "../../../core/actions";
 import { connect } from 'react-redux';
-import {Button} from "../";
 
 const Notification = (props) => {
-    const markAsRead = (notif) => {
+    const markAsRead = (e, notif) => {
         props.dispatch(RemoveNotification(notif._id));
     };
 
@@ -17,10 +16,7 @@ const Notification = (props) => {
             <div className="sf-notification-body">
                 <div className="sf-notification-title">
                     <span>{ props.item.name }</span>
-                    <div className="sf-notification-title">
-                        <span>{ props.item.name }</span>
-                        <Button className="sf-butotn sf-button-xs" onClick={ markAsRead.bind(props.item) }>OK</Button>
-                    </div>
+                    <i className="material-icons" onClick={ markAsRead.bind(e, props.item) }>visibility_off</i>
                 </div>
                 <div className="sf-notification-desc">
                     <p>{ props.item.description }</p>
