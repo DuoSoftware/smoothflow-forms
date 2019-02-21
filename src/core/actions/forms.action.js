@@ -29,10 +29,3 @@ export const LoadedForms = forms => ({
     forms
 });
 
-export const RemoveLoadedForm = (forms, index) => ({
-    category: 'FORMS',
-    type: 'REMOVE_LOADED_FORM',
-    index: index,
-    forms
-});
-

@@ -8,9 +8,6 @@ import {createStore} from "redux";
 import rootReducer from "../../core/reducers";
 import IoTClient from "../../core/lib/iot-client";
 import Formview from "../../_containers/formview/sf_tf.formview.container";
-import StartConvPage from "../Start-conv-page";
-import ChatComponent from "../ChatComponent";
-import {KEY} from "../../core/services";
 
 const store = createStore(rootReducer);
 
@@ -100,13 +97,8 @@ class Tabs extends Component {
 
         if(children[activeTabIndex]) {
             debugger
-            return this.props.children.map((child, i) => {
-                    if (child.props.children.type === 'form') {
-                        return <Formview key={KEY()} className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link}/>
-                    } else {
-                        return <ChatComponent key={KEY()} className={i === activeTabIndex ? 'show-chat-component' : ''} _id={child.props.children._id} />
-                    }
-                }
+            return this.props.children.map((child, i) =>
+                <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link}/>
             )
         }
     }

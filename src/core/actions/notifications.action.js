@@ -21,9 +21,3 @@ export const Tokens = tokens => ({
     type: 'TOKENS',
     tokens
 });
-
-export const RemoveNotification = notif => ({
-    category: 'NOTIFICATION',
-    type: 'REMOVE',
-    notif
-});

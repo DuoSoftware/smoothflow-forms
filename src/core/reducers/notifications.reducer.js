@@ -3,7 +3,6 @@ import toastr from 'react-redux-toastr';
 const notifications = {
     notifications_open : false,
     notifications: [],
-    notifications_hidden: [],
     global_notif_connection : null,
     tokens: {}
 };
@@ -47,18 +46,6 @@ const NotificationReducer = (state = notifications, action) => {
             return {
                 ...state,
                 'tokens' : action.tokens
-            };
-
-        case 'REMOVE' :
-            const _notifs = [...state.notifications];
-            const _notifs_hidden = [...state.notifications_hidden];
-            const i = _notifs.indexOf(action.notif);
-            const removed = _notifs.splice(i, 1);
-            _notifs_hidden.push(action.notif);
-            return {
-                ...state,
-                'notifications' : removed,
-                'notifications_hidden' : _notifs_hidden
             };
 
         default :

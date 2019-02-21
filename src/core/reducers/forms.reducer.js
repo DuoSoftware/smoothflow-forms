@@ -40,12 +40,6 @@ const FormReducer = (state = form, action) => {
                 loaded_forms: action.forms
             };
 
-        case 'REMOVE_LOADED_FORM' :
-            return {
-                ...state,
-                loaded_forms: [...state.loaded_forms.slice(0, action.index), ...state.loaded_forms.slice(action.index + 1)]
-            };
-
         default :
             return state;
     }
