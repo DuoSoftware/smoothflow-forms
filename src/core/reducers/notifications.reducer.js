@@ -53,11 +53,11 @@ const NotificationReducer = (state = notifications, action) => {
             const _notifs = [...state.notifications];
             const _notifs_hidden = [...state.notifications_hidden];
             const i = _notifs.indexOf(action.notif);
-            const removed = _notifs.splice(i, 1);
+            _notifs.splice(i, 1);
             _notifs_hidden.push(action.notif);
             return {
                 ...state,
-                'notifications' : removed,
+                'notifications' : _notifs,
                 'notifications_hidden' : _notifs_hidden
             };
 
