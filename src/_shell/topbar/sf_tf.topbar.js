@@ -54,6 +54,7 @@ class TopBar extends Component {
 
     openNotifications =(e)=> {
         const isopen = this.props.notifications.notifications_open;
+        this.props.dispatch(InjectTask([]));
         if (isopen) {
             this.props.dispatch(OpenNotifications(false));
         } else {
@@ -65,6 +66,7 @@ class TopBar extends Component {
 
     openTasks =(e)=> {
         const isopen = this.props.tasks.tasks_open;
+        this.props.dispatch(InjectTask([]));
         if (isopen) {
             this.props.dispatch(OpenTasks(false));
             this.props.dispatch(TasksFullwidth(false));
