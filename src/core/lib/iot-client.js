@@ -59,7 +59,6 @@ class IoTClient {
         }
     }
 
-
     onMessageReceived(callback) {
         if (this.client) {
             this.client.on('message', (topic, message) => {

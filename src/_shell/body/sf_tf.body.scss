@@ -55,3 +55,19 @@
     }
   }
 }
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .sf-tf-body {
+    .sf-notifications {
+      &.sf-notifications-opened {
+        width: 100%;
+      }
+    }
+  }
+  .sf-tasks-showall {
+    display: none;
+  }
+}

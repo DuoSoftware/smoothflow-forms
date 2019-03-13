@@ -15,3 +15,8 @@ export const PreloadNotifications = loader => ({
     type : 'PRELOAD_NOTIFICATIONS',
     loader
 });
+
+export const ToggleXsSidenav = () => ({
+    category : 'UIHELPER',
+    type : 'SIDENAV_TOGGLE_XS'
+});

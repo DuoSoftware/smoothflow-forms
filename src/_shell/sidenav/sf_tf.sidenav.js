@@ -3,8 +3,8 @@ import './sf_tf.sidenav.scss'
 import { connect } from 'react-redux'
 import {FormThumbnail, List, Preloader, Textbox} from "../../_components/COMMON";
 import {
-    ActiveForm, InjectNotification, LoadedForms, LoadForm, LoadWorkspaces, PreloadWorkspaces,
-    SelectedWorkspace
+    ActiveForm, InjectNotification, LoadedForms, LoadForm, LoadWorkspaces, OpenTasks, PreloadWorkspaces,
+    SelectedWorkspace, ToggleXsSidenav
 } from "../../core/actions";
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { KEY } from "../../core/services";
@@ -196,6 +196,13 @@ class Sidenav extends Component {
         }
         this.props.dispatch(ActiveForm(form, null));
         this.props.dispatch(LoadedForms(fgs));
+
+        if (this.props.uihelper._sidenav_xs_) {
+            this.props.dispatch(ToggleXsSidenav())
+        }
+        if (this.props.tasks.tasks_open) {
+            this.props.dispatch(OpenTasks(false))
+        }
     };
 
     goBackToWorkspaces = () => {
@@ -208,7 +215,7 @@ class Sidenav extends Component {
 
     render() {
         return (
-            <div className={`sf-tf-sidenav${ this.state.sidenav_expanded ? ' sf-sidenav-expanded' : '' }`}>
+            <div className={`sf-tf-sidenav ${ this.state.sidenav_expanded ? ' sf-sidenav-expanded' : '' } ${ this.props.uihelper._sidenav_xs_ ? ' sf-tf-sidenav-show-xs' : '' }`}>
                 <span className={`sf-icon-toggle sf-icon icon-sf_ico_${ this.state.sidenav_expanded ? 'chevron_left' : 'chevron_right' }`} onClick={ (e) => this.expandSidenav(e) }></span>
                 <div className="sf-sidenav-workspaces">
                     {
@@ -293,6 +300,7 @@ class Sidenav extends Component {
 const mapStateToProps = state => ({
     form: state.form,
     uihelper: state.uihelper,
+    tasks: state.tasks,
     notifications: state.notifications
 });
 export default connect(mapStateToProps) (Sidenav);

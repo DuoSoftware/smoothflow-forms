@@ -98,7 +98,9 @@
     width: $sf-button-height;
     height: $sf-button-height;
     border-radius: 100%;
+    display: flex;
     justify-content: center;
+    align-items: center;
     &.sf-button-iconed {
       .sf-icon {
         margin-right: 0;

@@ -6,8 +6,9 @@ const Textbox = (props) => {
         <div className={`sf-textbox${props.center ? ' sf-textbox-center' : ''}`} { ...props }>
             {
                 props.icon
-                ?   <i className="material-icons sf-textbox-icon" style={{ fontSize: props.size+'px'}}>{props.icon}</i>
-                    // <span className={`sf-textbox-icon sf-icon icon-sf_ico_${props.icon}`} style={{ fontSize: props.size+'px'}}></span>
+                ?   props.font
+                    ? <span className={`sf-textbox-icon sf-icon icon-sf_ico_${props.icon}`} style={{ fontSize: props.size+'px'}}></span>
+                    : <i className="material-icons sf-textbox-icon" style={{ fontSize: props.size+'px'}}>{props.icon}</i>
                 :
                 props.image
                 ?   <img className="sf-textbox-image" src={props.image} style={{ width: props.size+'px'}} />

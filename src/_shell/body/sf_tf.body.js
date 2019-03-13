@@ -35,7 +35,7 @@ class Body extends Component {
                         ?   <div className={`sf-flexbox-row sf-flex-center`} style={ {'marginBottom': '15px'} }>
                                 <h2 className="sf-flex-1" style={{'margin':0}}>Tasks</h2>
                                 {
-                                    this.props.tasks.task_fullwidth ? <Button className="sf-button sf-button-circle" onClick={ (e) => this.tasksAll(e, false)}><span className="sf-icon icon-sf_ico_close_circle"></span></Button> : <Button className="sf-button sf-button-xsmall" onClick={ (e) => this.tasksAll(e, true)}>Show All</Button>
+                                    this.props.tasks.task_fullwidth ? <Button className="sf-button sf-button-circle" onClick={ (e) => this.tasksAll(e, false)}><span className="sf-icon icon-sf_ico_close_circle"></span></Button> : <Button className="sf-tasks-showall sf-button sf-button-xsmall" onClick={ (e) => this.tasksAll(e, true)}>Show All</Button>
                                 }
                             </div>
                         :   null

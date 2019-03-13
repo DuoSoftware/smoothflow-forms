@@ -33,6 +33,7 @@ code {
 }
 
 .sf-tf-main-container {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: calc(100% - 51px);
@@ -63,6 +64,7 @@ iframe{ position: absolute; left:0; right:0; bottom:0; top:0; border:0 };
 
 .sf-tf-formview {
   display: none;
+  height: 100%;
   &.sf-formview-show {
     display: block;
   }

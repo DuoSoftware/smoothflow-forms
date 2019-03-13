@@ -90,6 +90,7 @@
     box-shadow: -2px 0px 3px #eee;
     box-sizing: border-box;
     z-index: 1;
+    background: #ffffff;
   }
 
   .sf-list {
@@ -158,6 +159,33 @@
       left: 20px;
       opacity: 0;
       @include animation-transition();
+    }
+  }
+}
+
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .sf-tf-sidenav {
+    z-index: 200000;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    box-shadow: 0px 10px 110px #00000020;
+    overflow: hidden;
+    width: 0!important;
+    border: none;
+    .sf-icon-toggle {
+      display: none;
+    }
+
+    &.sf-tf-sidenav-show-xs {
+      width: $sf-sidenav-width-expanded!important;
+    }
+    &.sf-sidenav-expanded {
+      width: auto;
     }
   }
 }

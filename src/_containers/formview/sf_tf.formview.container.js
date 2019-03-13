@@ -11,7 +11,10 @@ const Formview = props =>
                         <iframe id="typeform-full" width="100%" height="100%" frameBorder="0" src={ props.form }></iframe>
                         <script type={'text/javascript'} src={'https://embed.typeform.com/embed.js'}></script>
                     </Wrap>
-                :   <ChatComponent _id={props.id}/>
+                :
+            props.type === 'app'
+                ?   <ChatComponent _id={props.id}/>
+                :   <iframe id="app" width="100%" height="100%" frameBorder="0" src={ props.form }></iframe>
         }
     </div>
 

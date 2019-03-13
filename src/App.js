@@ -22,7 +22,7 @@ import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import toastr from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://smoothflow.herokuapp.com');
+// const socket = openSocket('http://smoothflow.herokuapp.com');
 
 function TabContainer(props) {
     return (
@@ -72,7 +72,6 @@ class App extends Component {
                                 this.props.dispatch(User(profile.data.Result));
                             })
                             .catch(_errorRes => {
-                                console.log(_errorRes);
                                 this.props.dispatch(PreloadShell(false));
                                 this.props.dispatch(User(profile.data.Result));
                             });
@@ -80,7 +79,6 @@ class App extends Component {
                     }
                 })
                 .catch(errorRes => {
-                    console.log(errorRes);
                     this.props.dispatch(PreloadShell(false));
                 });
         }
@@ -97,7 +95,7 @@ class App extends Component {
         function attachPrincipalPolicy(policyName, principal) {
             new AWS.Iot().attachPrincipalPolicy({ policyName: policyName, principal: principal }, function (err, data) {
                 if (err) {
-                    console.error(err); // an error occurred
+                    // console.error(err); // an error occurred
                 }
             });
         }
@@ -137,7 +135,7 @@ class App extends Component {
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
-                console.error(error);
+                // console.error(error);
             } else {
                 attachPrincipalPolicy("Server", AWS.config.credentials.identityId);
                 let options = {
@@ -174,9 +172,9 @@ class App extends Component {
             }
         });
 
-        socket.on("connect", () => {
-            console.log("socket connected")
-        })
+        // socket.on("connect", () => {
+        //     console.log("socket connected")
+        // })
     };
 
     notificationsManager (topic, message) {
@@ -243,7 +241,7 @@ class App extends Component {
                     position="top-right"
                     transitionIn="fadeIn"
                     transitionOut="fadeOut"
-                    closeOnToastrClick/>
+                    closeOnToastrClick />
             </div>
         );
     }

@@ -3,7 +3,7 @@ import "./index.css";
 import openSocket from 'socket.io-client';
 import {ChatSend} from "../../core/services";
 import { connect } from 'react-redux';
-const socket = openSocket('http://smoothflow.herokuapp.com');
+// const socket = openSocket('http://smoothflow.herokuapp.com');
 
 class ChatComponent extends Component {
     constructor() {
@@ -17,10 +17,10 @@ class ChatComponent extends Component {
     componentDidMount() {
         debugger
         let { id } = this.props._id;
-        socket.on(id, (data) => {
-            let msgs = this.state.chat;
-            this.setState({ chat: [...msgs, data] });
-        })
+        // socket.on(id, (data) => {
+        //     let msgs = this.state.chat;
+        //     this.setState({ chat: [...msgs, data] });
+        // })
     }
 
     handleChange = (event) => {
@@ -90,7 +90,24 @@ class ChatComponent extends Component {
                     </div>
 
                     <form className="input-main-div" onSubmit={this.chatSubmit}>
+                        {/*<div className="sf-convo-type-selector">*/}
+                            {/*<button type="Submit" className="send-button">*/}
+                                {/*{!this.state.loading ?*/}
+                                    {/*<i className="material-icons">message</i>*/}
+                                    {/*: <img className="input-icons" alt="loading" src={require("../../core/assets/images/loading.gif")} />}*/}
+                            {/*</button>*/}
+                        {/*</div>*/}
                         <input className="chat-input" placeholder="Write a reply..." value={this.state.input} onChange={this.handleChange} />
+                        <button type="button" className="sf-button sf-button-circle text-chat-control">
+                            {!this.state.loading ?
+                                <i className="material-icons">image</i>
+                                : <img className="input-icons" alt="loading" src={require("../../core/assets/images/loading.gif")} />}
+                        </button>
+                        <button type="button" className="sf-button sf-button-circle text-chat-control">
+                            {!this.state.loading ?
+                                <i className="material-icons">attachment</i>
+                                : <img className="input-icons" alt="loading" src={require("../../core/assets/images/loading.gif")} />}
+                        </button>
                         <button type="Submit" className="send-button">
                             {!this.state.loading ?
                                 <i className="material-icons">send</i>

@@ -5,7 +5,10 @@ import RedirectOutside from "../../core/_auth.redirect";
 import URLs from "../../core/_urls_";
 import {Button, ButtonGroup, Dropdown, List, Preloader, Textbox} from "../../_components/COMMON";
 import Wrap from "../../_components/COMMON/Wrap/_wrap";
-import {InjectTask, OpenNotifications, OpenTasks, PreloadNotifications, TasksFullwidth} from "../../core/actions";
+import {
+    InjectTask, OpenNotifications, OpenTasks, PreloadNotifications, TasksFullwidth,
+    ToggleXsSidenav
+} from "../../core/actions";
 import {TaskService} from "../../core/services";
 import _ from "lodash";
 
@@ -19,7 +22,7 @@ class TopBar extends Component {
 
     // LOCAL dev authentication ---------------------------//
     localSignIn = () => {
-        document.cookie = "satellizer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrYXN1bi53QGR1b3NvZnR3YXJlLmNvbSIsImp0aSI6ImQzMTdjMGQ5LWRiYWMtNDY0Ni05Y2Q1LTRkYTgzYTY4NzRlMSIsInN1YiI6IkFjY2VzcyBjbGllbnQiLCJleHAiOjE1NTEzNDczNzEsInRlbmFudCI6MSwiY29tcGFueSI6NDEsImNvbXBhbnlOYW1lIjoia2FzdW4iLCJjb250ZXh0Ijp7fSwic2NvcGUiOlt7InJlc291cmNlIjoibXlOYXZpZ2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJteVVzZXJQcm9maWxlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJhdHRyaWJ1dGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiZ3JvdXAiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVzb3VyY2V0YXNrYXR0cmlidXRlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InRhc2siLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicHJvZHVjdGl2aXR5IiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6IlNoYXJlZCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ0YXNraW5mbyIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJhcmRzcmVzb3VyY2UiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiYXJkc3JlcXVlc3QiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdG1ldGEiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicXVldWUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdHNlcnZlciIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJzaXB1c2VyIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXIiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlclByb2ZpbGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoib3JnYW5pc2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiXX0seyJyZXNvdXJjZSI6InJlc291cmNlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJwYWNrYWdlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJjb25zb2xlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJ1c2VyU2NvcGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlckFwcFNjb3BlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJBcHBNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6ImNsaWVudCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJjbGllbnRTY29wZSIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ3YWxsZXQiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfV0sImlhdCI6MTU1MDc0MjU3MX0.P4hOOuKDUPTVlNsXGr5hn0dJzIicDZ2ZawX-WDMKScA";
+        document.cookie = "satellizer_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkdWtlLmFoYWFuQHBsdXRvY293LmNvbSIsImp0aSI6IjM0ZjMwZTY5LTY5M2EtNDYwMi1hNGZiLThkZmRlY2E0YTZhOSIsInN1YiI6IkFjY2VzcyBjbGllbnQiLCJleHAiOjE1NTI4OTc2OTcsInRlbmFudCI6MSwiY29tcGFueSI6MjYyLCJjb21wYW55TmFtZSI6IkR1a2UiLCJjb250ZXh0Ijp7fSwic2NvcGUiOlt7InJlc291cmNlIjoibXlOYXZpZ2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJteVVzZXJQcm9maWxlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJhdHRyaWJ1dGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiZ3JvdXAiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVzb3VyY2V0YXNrYXR0cmlidXRlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InRhc2siLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicHJvZHVjdGl2aXR5IiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6IlNoYXJlZCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ0YXNraW5mbyIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJhcmRzcmVzb3VyY2UiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiYXJkc3JlcXVlc3QiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdG1ldGEiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicXVldWUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdHNlcnZlciIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJzaXB1c2VyIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXIiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlclByb2ZpbGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoib3JnYW5pc2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiXX0seyJyZXNvdXJjZSI6InJlc291cmNlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJwYWNrYWdlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJjb25zb2xlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJ1c2VyU2NvcGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlckFwcFNjb3BlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJBcHBNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6ImNsaWVudCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJjbGllbnRTY29wZSIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ3YWxsZXQiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfV0sImlhdCI6MTU1MjI5Mjg5N30.LBPFe46qRFSi_lVeao6k5gE0xp2VC5Ue-4uObobhDf0";
         return <RedirectOutside url={URLs.auth.signup} _rollback_point={window.location.href} />
     };
     // END - LOCAL dev authentication ---------------------//
@@ -51,6 +54,9 @@ class TopBar extends Component {
                 return;
         }
     };
+    toggleXsSidenav = (e) => {
+        this.props.dispatch(ToggleXsSidenav());
+    };
 
     openNotifications =(e)=> {
         const isopen = this.props.notifications.notifications_open;
@@ -62,6 +68,7 @@ class TopBar extends Component {
             this.props.dispatch(TasksFullwidth(false));
         }
         this.props.dispatch(OpenTasks(false));
+        if(this.state.userctrl.togglePanel)this.toggleUserCtrlPanel('TOGGLE', null);
     };
 
     openTasks =(e)=> {
@@ -98,18 +105,24 @@ class TopBar extends Component {
                 });
         }
         this.props.dispatch(OpenNotifications(false));
+        if(this.state.userctrl.togglePanel)this.toggleUserCtrlPanel('TOGGLE', null);
     };
 
     render () {
         return (
             <div className="sf-tf-topbar">
                 <div className="sf-tf-topbar-brand">
+                    <div className="sf-menu-toggle">
+                        <Button className="sf-button sf-button-clear sf-button-circle" onClick={(e)=>this.toggleXsSidenav()}>
+                            <i className="material-icons">menu</i>
+                        </Button>
+                    </div>
                     <div className="sf-tf-topbar-logo">
                         <img src="https://smoothflow.io/images/logo-smoothflow-beta-purple.svg" alt=""/> <span
                         className="sf-tf-topbar-logo-text">DOCK</span>
                     </div>
                 </div>
-                <div className="sf-topbar-btngrp-wrap">
+                <div className ="sf-topbar-btngrp-wrap">
 
                 </div>
                 <div className="sf-tf-topbar-tools">
@@ -120,10 +133,10 @@ class TopBar extends Component {
                                 {
                                     this.props.user.is_logged_in
                                     ?   <Wrap>
-                                            <button className={`sf-tf-topbar-tool sf-button sf-button-circle${this.props.tasks.tasks_open ? ' sf-tf-topbar-tool-selected' : ''}`} onClick={ (e)=> this.openTasks(e) }>
+                                            <button className={`sf-topbar-tool-tasks sf-tf-topbar-tool sf-button sf-button-circle${this.props.tasks.tasks_open ? ' sf-tf-topbar-tool-selected' : ''}`} onClick={ (e)=> this.openTasks(e) }>
                                                 <span className="sf-icon icon-sf_ico_items"></span>
                                             </button>
-                                            <button className={`sf-tf-topbar-tool sf-button sf-button-circle${this.props.notifications.notifications_open ? ' sf-tf-topbar-tool-selected' : ''}`} onClick={ (e)=> this.openNotifications(e) }>
+                                            <button className={`sf-topbar-tool-notifs sf-tf-topbar-tool sf-button sf-button-circle${this.props.notifications.notifications_open ? ' sf-tf-topbar-tool-selected' : ''}`} onClick={ (e)=> this.openNotifications(e) }>
                                                 { this.props.notifications.notifications.length ? <span className="sf-notif-indecator"></span> : null }
                                                 <span className="sf-icon icon-sf_ico_notification"></span>
                                             </button>
@@ -140,7 +153,7 @@ class TopBar extends Component {
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
                                                 style={{'marginRight': '10px'}}
-                                                onClick={(e) => this.signIn(e)}
+                                                onClick={(e) => this.localSignIn(e)}
                                             >Sign In</Button>
                                             <Button
                                                 className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
@@ -155,6 +168,12 @@ class TopBar extends Component {
                     this.props.user.is_logged_in
                         ?   <Dropdown toggle={this.state.userctrl.togglePanel} openPos={55} closedPos={40} height={'auto'}>
                                 <List>
+                                    <li onClick={ (e)=> this.openTasks(e) }>
+                                        <Textbox icon={'items'} font={true}>Tasks</Textbox>
+                                    </li>
+                                    <li onClick={ (e)=> this.openNotifications(e) }>
+                                        <Textbox icon={'notification'} font={true}>Notifications</Textbox>
+                                    </li>
                                     <li onClick={this.toggleUserCtrlPanel.bind(null, 'LOGOUT')}>
                                         <Textbox icon={'home'}>Log out</Textbox>
                                     </li>

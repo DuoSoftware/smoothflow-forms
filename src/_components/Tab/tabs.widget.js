@@ -96,7 +96,6 @@ class Tabs extends Component {
         const {children} = this.props;
 
         if(children[activeTabIndex]) {
-            debugger
             return this.props.children.map((child, i) =>
                 <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
             )
@@ -148,6 +147,7 @@ class Tabs extends Component {
 
 const mapStateToProps = state => ({
     form: state.form,
+    uihelper: state.uihelper,
     notifications: state.notifications,
     tasks: state.tasks
 });
