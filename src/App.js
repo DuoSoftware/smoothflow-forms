@@ -221,7 +221,7 @@ class App extends Component {
                     <Body>
                     {
                         !this.props.form.loaded_forms.length
-                            ?   <Message>No form has been found</Message>
+                            ?   <Message>Open a form from your left menu.</Message>
                             :   <Tabs>
                                     {
                                         this.props.form.loaded_forms.map(form =>
