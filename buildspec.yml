@@ -6,7 +6,7 @@ phases:
       commands:
         - npm install
       finally:
-        - echo 'Completed installing'
+        - echo 'Completed installing '
     build:
       commands:
         - npm run-script build
