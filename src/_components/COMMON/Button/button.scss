@@ -19,6 +19,7 @@
   font-weight: bold;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
   text-decoration: inherit;
   -webkit-transition: background $sf-animation-time;
   -moz-transition: background $sf-animation-time;
@@ -69,6 +70,12 @@
   &.sf-button-small {
     padding: $sf-spacing-inner-third $sf-spacing-inner-secondary;
   }
+  &.sf-button-xsmall {
+    padding: $sf-spacing-inner-third $sf-spacing-inner-secondary;
+    font-size: 12px;
+    font-weight: normal;
+    height: 30px;
+  }
   &.sf-button-clear {
     background: transparent;
     color: $sf-color-secondary;
@@ -91,7 +98,9 @@
     width: $sf-button-height;
     height: $sf-button-height;
     border-radius: 100%;
+    display: flex;
     justify-content: center;
+    align-items: center;
     &.sf-button-iconed {
       .sf-icon {
         margin-right: 0;

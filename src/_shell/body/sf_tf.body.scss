@@ -33,6 +33,7 @@
     -moz-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
     box-shadow: -3px 0 $sf-shadow-size-primary $sf-color-shadow-primary;
     z-index: 10 ;
+    overflow-y: scroll;
     -webkit-transition: all $sf-animation-time;
     -moz-transition: all $sf-animation-time;
     -ms-transition: all $sf-animation-time;
@@ -48,5 +49,25 @@
       -o-transition: all $sf-animation-time;
       transition: all $sf-animation-time;
     }
+
+    &.sf-notifications-full {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .sf-tf-body {
+    .sf-notifications {
+      &.sf-notifications-opened {
+        width: 100%;
+      }
+    }
+  }
+  .sf-tasks-showall {
+    display: none;
   }
 }

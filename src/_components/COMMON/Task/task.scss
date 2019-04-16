@@ -33,9 +33,15 @@
       font-size: 12px;
       display: inline-block;
       padding: $sf-spacing-inner-third - 3 $sf-spacing-inner-third + 2;
-      background: $sf-color-secondary;
+      background: $sf-color-status-private;
       border-radius: $sf-border-radius-primary;
       color: #ffffff;
+      &.task-INQUEUE {
+        background: $sf-color-status-private;
+      }
+      &.task-STARTED {
+        background: $sf-color-status-pending;
+      }
     }
   }
   .sf-task-body {
@@ -52,6 +58,56 @@
     .sf-task-assign-to {
       flex: 1;
     }
+    .sf-task-favourite {
+      position: relative;
+      .material-icons {
+        margin-left: $sf-spacing-inner-primary;
+        width: 24px;
+        &:hover {
+          color: $sf-color-primary;
+        }
+      }
+      &.sf-task-favourite-on {
+        .material-icons {
+          color: $sf-color-primary;
+        }
+      }
+    }
+  }
+
+  &.sf-task-full {
+    display: flex;
+    align-items: center;
+    .sf-task-header {
+      .sf-task-title {
+        width: 200px;
+      }
+    }
+    .sf-task-body {
+      margin: 0 $sf-spacing-inner-primary * 2;
+      flex: 1;
+      p {
+        margin: 0;
+      }
+    }
+    .sf-task-footer {
+      padding: 0;
+      .sf-task-assignee {
+        span {
+          display: flex;
+        }
+      }
+      .sf-task-assign-to {
+        margin-left: $sf-spacing-inner-primary;
+      }
+    }
+  }
+  &.sf-task-locked,
+  &.sf-task-locked:hover{
+    opacity: 0.3;
+    background: #eee;
+    cursor: pointer;
+    pointer-events: none;
   }
 
   &:hover {

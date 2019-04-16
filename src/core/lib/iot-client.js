@@ -1,5 +1,5 @@
 import AwsIot from 'aws-iot-device-sdk';
-import Config from '../../config';
+import Config from '../../config/_awsconfig';
 
 class IoTClient {
     constructor(options = {}) {
@@ -58,7 +58,6 @@ class IoTClient {
             return this;
         }
     }
-
 
     onMessageReceived(callback) {
         if (this.client) {

@@ -13,6 +13,9 @@
     padding: $sf-spacing-inner-secondary 0;
     //flex: 1;
     width: $sf-brand-width;
+    .sf-menu-toggle {
+      display: none;
+    }
     .sf-tf-topbar-logo {
       display: flex;
       align-items: center;
@@ -98,7 +101,36 @@
   .sf-overhead-dropdown {
     width: 200px;
     left: auto;
-    z-index: 100000;
+    z-index: 100000!important;
     padding: 0 $sf-spacing-inner-primary;
+  }
+}
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 760px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .sf-tf-topbar {
+    padding-left: $sf-spacing-inner-third;
+    .sf-tf-topbar-brand {
+      //padding: 13px 0;
+      display: flex;
+      align-items: center;
+      .sf-menu-toggle {
+        display: block;
+      }
+        .sf-tf-topbar-logo {
+        line-height: 20px;
+        img {
+          width: 110px;
+        }
+      }
+    }
+    .sf-tf-topbar-tools {
+      .sf-topbar-tool-tasks,
+      .sf-topbar-tool-notifs {
+        display: none;
+      }
+    }
   }
 }

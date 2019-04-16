@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import {ActiveForm} from "../../core/actions";
 import {createStore} from "redux";
 import rootReducer from "../../core/reducers";
+import IoTClient from "../../core/lib/iot-client";
+import Formview from "../../_containers/formview/sf_tf.formview.container";
 
 const store = createStore(rootReducer);
 
@@ -53,7 +55,6 @@ class Tabs extends Component {
     componentDidUpdate() {
         const form = this.props.form.active_form;
         const i = this.props.form.loaded_forms.indexOf(form);
-        // debugger
         if(this.state.activeTabIndex !== i) {
             // debugger
             this.handleTabClick(i);
@@ -66,7 +67,8 @@ class Tabs extends Component {
             activeTabIndex: tabIndex === this.state.activeTabIndex ? this.props.defaultActiveTabIndex : tabIndex
         });
         const forms = this.props.form.loaded_forms;
-        this.props.dispatch(ActiveForm(forms[tabIndex], null));
+        const form = forms[tabIndex];
+        this.props.dispatch(ActiveForm(form, null));
     }
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
@@ -81,11 +83,22 @@ class Tabs extends Component {
     }
 
     // Render current active tab content
+    // renderActiveTabContent() {
+    //     debugger
+    //     const {children} = this.props;
+    //     const {activeTabIndex} = this.state;
+    //     if(children[activeTabIndex]) {
+    //         return children[activeTabIndex].props.children;
+    //     }
+    // }
     renderActiveTabContent() {
-        const {children} = this.props;
         const {activeTabIndex} = this.state;
+        const {children} = this.props;
+
         if(children[activeTabIndex]) {
-            return children[activeTabIndex].props.children;
+            return this.props.children.map((child, i) =>
+                <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
+            )
         }
     }
 
@@ -133,7 +146,10 @@ class Tabs extends Component {
 }
 
 const mapStateToProps = state => ({
-    form: state.form
+    form: state.form,
+    uihelper: state.uihelper,
+    notifications: state.notifications,
+    tasks: state.tasks
 });
 
 export default ( connect(mapStateToProps) )(Tabs);

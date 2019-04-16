@@ -25,6 +25,8 @@
     .sf-notification-title {
       font-weight: 500;
       margin-bottom: $sf-spacing-inner-secondary;
+      display: flex;
+      align-items: center;
     }
     .sf-notification-desc {
       p {
@@ -38,4 +40,11 @@
     background: $sf-highlighter-gray;
     cursor: pointer;
   }
+}
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
 }

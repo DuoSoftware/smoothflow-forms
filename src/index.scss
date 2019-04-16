@@ -1,5 +1,7 @@
 @import "./core/styles/variables";
 @import "./core/assets/icons/icons.css";
+@import "../node_modules/material-design-icons/iconfont/material-icons.css";
+@import '../node_modules/react-redux-toastr/src/styles/index';
 
 body,
 html,
@@ -18,12 +20,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sf-align-right {
+  text-align: right;
+}
+.sf-spacing-h-p {
+  padding: $sf-spacing-inner-primary 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 .sf-tf-main-container {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: calc(100% - 51px);
@@ -50,4 +60,26 @@ iframe{ position: absolute; left:0; right:0; bottom:0; top:0; border:0 };
   -webkit-align-content: center;
   justify-content: center;
   -webkit-justify-content: center;
+}
+
+.sf-tf-formview {
+  display: none;
+  height: 100%;
+  &.sf-formview-show {
+    display: block;
+  }
+  &.sf-tf-appview {
+    height: 100%;
+  }
+}
+.sf-empty-convo {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    font-weight: 300;
+    color: #ddd;
+  }
 }
