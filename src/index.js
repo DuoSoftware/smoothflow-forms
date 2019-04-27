@@ -46,7 +46,13 @@ fetchSession().then(function (value) {
         </Provider>
         , document.getElementById('root'));
 }, function (reason) {
-    debugger
+    ReactDOM.render(
+        <Provider store={store}>
+            <MuiThemeProvider theme={theme}>
+                <App />
+            </MuiThemeProvider>
+        </Provider>
+        , document.getElementById('root'));
 });
 // END - HTTP config ----------------------------------------------//
 
