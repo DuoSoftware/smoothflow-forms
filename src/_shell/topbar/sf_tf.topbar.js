@@ -141,7 +141,7 @@ class TopBar extends Component {
                                                 <span className="sf-icon icon-sf_ico_notification"></span>
                                             </button>
                                             <div className="sf-tf-topbar-tool sf-topbar-textimg" onClick={this.toggleUserCtrlPanel.bind(null, 'TOGGLE')}>
-                                                <span>{ this.props.user.email.contact.split('')[0] }</span>
+                                                <span>{ this.props.user.sesuser.given_name.split('')[0] }</span>
                                             </div>
                                             {/*<span*/}
                                                 {/*className="sf-tf-topbar-tool "*/}

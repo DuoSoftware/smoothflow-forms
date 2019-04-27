@@ -23,6 +23,7 @@ import toastr from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
 import openSocket from 'socket.io-client';
 // const socket = openSocket('http://smoothflow.herokuapp.com');
+import Amplify from 'aws-amplify'
 
 function TabContainer(props) {
     return (
@@ -52,36 +53,45 @@ class App extends Component {
     };
 
     componentDidMount = () => {
-        const _t = UIHelper.getSatellizerToken();
+        // const _t = UIHelper.getSatellizerToken();
+        Amplify.Auth.currentSession()
+            .then(_ses => {
+                this.props.dispatch(PreloadShell(true));
+                const _sesuser = _ses.idToken.payload;
+                UserService.getUserProfile()
+                    .then(profile => {
+                        if (profile.data.IsSuccess) {
+                            profile.data.Result.given_name = _sesuser.given_name;
+                            profile.data.Result.family_name = _sesuser.family_name;
+                            this.props.dispatch(PreloadShell(false));
+                            this.props.dispatch(User(profile.data.Result));
+                            this.props.dispatch(SignIn(true));
+
+                            // const company = _ses.idToken.jwtToken;
+                            // const host = 'dev.smoothflow.io';   //window.location.host;
+                            //
+                            // UserService.getUserSettings(URLs.auth.getUserSettings(host, company))
+                            //     .then((settings) => {
+                            //         profile.data.Result.settings = settings.data.Result;
+                            //         this.props.dispatch(PreloadShell(false));
+                            //         this.props.dispatch(User(profile.data.Result));
+                            //     })
+                            //     .catch(_errorRes => {
+                            //         this.props.dispatch(PreloadShell(false));
+                            //         this.props.dispatch(User(profile.data.Result));
+                            //     });
+
+                        }
+                    })
+                    .catch(errorRes => {
+                        this.props.dispatch(PreloadShell(false));
+                    });
+            })
+            .catch(eres => {
+                debugger
+            })
         const urlParams = new URLSearchParams(window.location.search);
         const formID = urlParams.get('formId');
-        if (_t) {
-            this.props.dispatch(PreloadShell(true));
-            this.props.dispatch(SignIn(true));
-            UserService.getUserProfile()
-                .then(profile => {
-                    if (profile.data.IsSuccess) {
-                        const _tokenParsed = UIHelper.parseJWT(_t);
-                        const company = _tokenParsed.companyName;
-                        const host = 'dev.smoothflow.io';   //window.location.host;
-
-                        UserService.getUserSettings(URLs.auth.getUserSettings(host, company))
-                            .then((settings) => {
-                                profile.data.Result.settings = settings.data.Result;
-                                this.props.dispatch(PreloadShell(false));
-                                this.props.dispatch(User(profile.data.Result));
-                            })
-                            .catch(_errorRes => {
-                                this.props.dispatch(PreloadShell(false));
-                                this.props.dispatch(User(profile.data.Result));
-                            });
-
-                    }
-                })
-                .catch(errorRes => {
-                    this.props.dispatch(PreloadShell(false));
-                });
-        }
         if(formID) {
             this.props.dispatch(LoadForm('https://kasun7.typeform.com/to/' + formID));
         }
