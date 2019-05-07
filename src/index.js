@@ -14,16 +14,27 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './core/styles/overrides'
 import Amplify from 'aws-amplify/lib/index'
 import ampconfig from './core/lib/AWS_COG_CONFIG_COMMON__';
+import ampconfigprod from './core/lib/AWS_COG_CONFIG_COMMON__PROD';
 
 let _w, _t, _p = null;
 const store = createStore(rootReducer);
 const _scopes = localStorage.getItem('scopes');
+let awsc = null;
 
 if (_scopes) {
     _w = UIHelper.parseJWT(_scopes).tenant;
     _p = UIHelper.parseJWT(_scopes).company;
 }
-const awsc = ampconfig;
+if (window.location.hostname == "localhost" ||
+    window.location.hostname == "dev.smoothflow.io" ||
+    window.location.hostname == "smoothflow-dev.s3-website-us-east-1.amazonaws.com" ||
+    window.location.hostname == "d35ie0dhlww2mo.cloudfront.net") {
+    awsc = ampconfig;
+} else if (window.location.hostname == "smoothflow.io" ||
+    window.location.hostname == "prod.smoothflow.io" ||
+    window.location.hostname == "d3ored5mvntnxi.cloudfront.net") {
+    awsc = ampconfigprod;
+}
 // const awsweb_parsed = JSON.parse(ampconfig);
 Amplify.configure(awsc);
 
