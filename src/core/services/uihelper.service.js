@@ -15,7 +15,7 @@ const UIHelper = {
         const cook = document.cookie.split('; ');
         for(const c of cook) {
             const a = c.split('=');
-            if(a[0] === 'satellizer_token') {
+            if (a[0] === 'satellizer_token') {
                 return c.split('=')[1];
             }
         }
