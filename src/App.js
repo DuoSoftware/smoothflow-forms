@@ -52,7 +52,7 @@ class App extends Component {
         this.setState({ value });
     };
 
-    componentDidMount = () => {
+    componentDidMount() {
         // const _t = UIHelper.getSatellizerToken();
         Amplify.Auth.currentSession()
             .then(_ses => {
