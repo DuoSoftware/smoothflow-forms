@@ -18,7 +18,6 @@ const conf = {
     "authenticationFlowType": "USER_PASSWORD_AUTH"
   },
   "API": {
-
     "endpoints" : [{
       "name" : "GetAllBots",
       "endpoint" : "https://smoothbotservicesdev.plus.smoothflow.io/DBF/API/1.0.0.0/BotService/Bots/"

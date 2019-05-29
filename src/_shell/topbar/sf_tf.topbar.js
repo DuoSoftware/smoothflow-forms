@@ -83,6 +83,7 @@ class TopBar extends Component {
             this.props.dispatch(PreloadNotifications(true));
             TaskService.getAllTasks()
                 .then(tasks => {
+                    debugger
                     tasks.data.Result.map((task, i) => {
                         if(task.raw_data) task.Link = task.raw_data.Link;
                         task.type = "task";
