@@ -22,11 +22,12 @@ class TasksContainer extends Component {
                     }
                     <Divider></Divider>
                     <h4>Created Tasks</h4>
-                    {
-                        this.props.tasks.tasks.general.map(task =>
-                            <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                        )
-                    }
+                    {/*{*/}
+                        {/*this.props.tasks.tasks.general.map(task =>*/}
+                            {/*<Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>*/}
+                        {/*)*/}
+                    {/*}*/}
+                     - none -
                     <h4>Received Tasks</h4>
                     {
                         this.props.tasks.tasks.general.map(task =>

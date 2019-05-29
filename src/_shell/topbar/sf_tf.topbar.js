@@ -81,42 +81,42 @@ class TopBar extends Component {
         else {
             this.props.dispatch(OpenTasks(true));
             this.props.dispatch(PreloadNotifications(true));
-            TaskService.getAllTasks()
+            TaskService.getTasksByAssignee(this.props.user.sesuser.email)
                 .then(tasks => {
-                    debugger
                     tasks.data.Result.map((task, i) => {
-                        if(task.raw_data) task.Link = task.raw_data.Link;
+                        // if(task.raw_data) task.Link = task.raw_data.Link;
                         task.type = "task";
                         task.locked = false;
-
+                        // task.raw_data.comments = [];
+                        // task.raw_data.sla_status = false;
                         // if(task.assignee !== this.props.user.username) {
                         //     if (task.review_status === 'STARTED') {
                         //         task.locked = true;
                         //     }
                         // }
                     });
-                    tasks.data.Result = [{
-                        "type": 'task',
-                        "task_name": 'Task 1',
-                        "form_name" : 'Task 1',
-                        "form_id" : '',
-                        "assigner" : 'newinurula@techno5.club',
-                        "assignee" : 'newinurula@techno5.club',
-                        "review_status": "OPEN",
-                        "raw_data": {
-                            "Link" : '',
-                            "comments": [{
-                                comment: 'Assigning this task to Wasantha',
-                                name: 'John Doe',
-                                time: '2019/05/20'
-                            }, {
-                                comment: 'Will attend to this asap',
-                                name: 'Wasantha',
-                                time: '2019/05/20'
-                            }]
-                        },
-                        "description": 'This is a test description'
-                    }];
+                    // tasks.data.Result = [{
+                    //     "type": 'task',
+                    //     "task_name": 'Task 1',
+                    //     "form_name" : 'Task 1',
+                    //     "form_id" : '',
+                    //     "assigner" : 'newinurula@techno5.club',
+                    //     "assignee" : 'newinurula@techno5.club',
+                    //     "review_status": "OPEN",
+                    //     "raw_data": {
+                    //         "Link" : '',
+                    //         "comments": [{
+                    //             comment: 'Assigning this task to Wasantha',
+                    //             name: 'John Doe',
+                    //             time: '2019/05/20'
+                    //         }, {
+                    //             comment: 'Will attend to this asap',
+                    //             name: 'Wasantha',
+                    //             time: '2019/05/20'
+                    //         }]
+                    //     },
+                    //     "description": 'This is a test description'
+                    // }];
                     this.props.dispatch(PreloadNotifications(false));
                     this.props.dispatch(InjectTask(tasks.data.Result));
                 })

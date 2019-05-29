@@ -8,6 +8,9 @@ const UserService = {
     },
     getUserSettings: (url) => {
         return axios.get(url)
+    },
+    getWorkspaceUsersById: (id) => {
+        return axios.get(URLs.workspace.base_ + URLs.workspace.getWorkspaceUsersById)
     }
 };
 

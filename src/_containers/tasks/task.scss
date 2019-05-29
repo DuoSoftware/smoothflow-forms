@@ -1,13 +1,22 @@
 @import "../../core/styles/variables";
 
 .sf-task-view {
+  height: 100%;
+  overflow: scroll;
+  //padding: 30px 0;
+  display: none;
+  &.sf-formview-show {
+    display: block;
+  }
+  &.sf-tf-appview {
+    height: 100%;
+  }
   form {
     width: 60%;
-    margin: 0 auto;
+    margin: 30px auto;
     padding: 20px;
     box-shadow: 0 1px 10px #00000020;
     border-radius: 5px;
-    margin-bottom: 20px;
 
     .sf-task-view-header {
       display: flex;
@@ -25,24 +34,171 @@
         border-radius: $sf-border-radius-primary;
         color: #ffffff;
         margin-bottom: 20px;
+        position: relative;
         &.task-INQUEUE {
           background: $sf-color-status-private;
         }
         &.task-STARTED {
           background: $sf-color-status-pending;
         }
+        &.task-sla-true {
+          padding-left: 20px;
+          background: $sf-color-status-public;
+        }
+        &.task-sla-false {
+          padding-left: 20px;
+          background: $sf-color-status-failed;
+        }
+        i.material-icons {
+          font-size: 15px;
+          position: absolute;
+          left: 3px;
+        }
+      }
+    }
+
+    .sf-task-view-summary {
+      display: flex;
+      .-summary-block {
+        flex: 1;
+        .-block-row {
+          padding: 5px 0;
+          margin-bottom: 15px;
+          position: relative;
+          b {
+            margin-bottom: 5px;
+            display: block;
+          }
+          p {margin: 0}
+          &.-block-inline {
+            display: flex;
+            align-items: center;
+            >b {
+              width: 130px;
+            }
+            > div {
+              flex: 1;
+              .sf-image-box {
+                display: flex;
+                align-items: center;
+                position: relative;
+                .sf-comment-user {
+                  border-radius: 100%;
+                  width: 20px;
+                  height: 20px;
+                  text-align: center;
+                  padding: 5px;
+                  background: $sf-color-shadow-primary;
+                  align-items: center;
+                  display: flex;
+                  justify-content: center;
+                  font-weight: 700;
+                  font-size: 15px;
+                  color: $sf-color-shadow-secondary;
+                  margin-right: 10px;
+                  text-transform: uppercase;
+                  overflow: hidden;
+                  img {
+                    width: 30px;
+                  }
+                }
+                span {
+                  flex: 1;
+                  color: #00000097;
+                }
+                i.material-icons {
+                  font-size: 15px;
+                  color: #aaa;
+                  position: absolute;
+                  right: 0;
+                  background: #fff;
+                  &:hover {
+                    cursor: pointer;
+                    color: #000;
+                  }
+                }
+              }
+            }
+          }
+          .revert-contorl {
+            position: absolute;
+            height: 17px;
+            top: 0;
+            bottom: 0;
+            right: -18px;
+            margin: auto;
+            font-size: 17px;
+            color: #aaaaaa;
+            &:hover {
+              cursor: pointer;
+              color: #000;
+            }
+          }
+        }
+        .-block-sla-info {
+          background: #fafafa;
+          border-radius: 10px;
+          .-block-row {
+            padding: 10px;
+            margin: 0;
+            > span {
+              font-size: 16px;
+              color: $sf-color-secondary;
+              text-align: right;
+            }
+            > span, > b {
+              flex: 1;
+            }
+            &:first-child {
+              > span, > b {
+                color: $sf-color-primary-dark;
+              }
+            }
+          }
+        }
       }
     }
 
     .sf-task-view-content {
-      margin-bottom: 30px;
+      margin: 15px 0 30px 0;
+      .-content-row {
+        display: flex;
+        margin-top: -1px;
+        .-content-row-cell {
+          flex: 1;
+          margin-right: -1px;
+          border: solid 1px #ddd;
+          padding: $sf-spacing-inner-secondary;
+        }
+      }
+    }
+
+    .sf-task-attachments {
+      display: flex;
+      height: 100px;
+      border: dashed 1px #ddd;
+      border-radius: 5px;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 0 30px 0;
+      background: #fafafa;
+      i.material-icons {
+        font-size: 50px;
+        opacity: 0.1;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
     }
 
     .sf-task-view-comments {
       .-new-comment {
         width: 100%;
-        margin-top: 20px;
+        margin-top: 10px;
         textarea {
+          font-size: 14px;
           outline: none;
           padding: 10px;
           box-sizing: border-box;

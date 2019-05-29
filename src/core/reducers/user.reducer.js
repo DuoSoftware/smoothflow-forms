@@ -14,7 +14,8 @@ const initState = {
     user_meta: {role: ""},
     username: "",
     _id: "",
-    is_logged_in: false
+    is_logged_in: false,
+    workspace_users: []
 };
 const UserReducer = (state = initState, action) => {
     switch (action.type) {
@@ -52,6 +53,12 @@ const UserReducer = (state = initState, action) => {
             return {
                 ...state,
                 integrations: action.integrations
+            };
+
+        case 'GET_WORKSPACE_USERS' :
+            return {
+                ...state,
+                workspace_users: action.users
             };
 
         default:

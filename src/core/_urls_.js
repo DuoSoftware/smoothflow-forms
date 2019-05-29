@@ -12,13 +12,18 @@ const URLs_dev = {
             return 'https://' + host + '/data/' + company + '.' + host + '/dashboardData/' + company;
         }
     },
+    workspace: {
+        base_ : 'https://ov2pcxpkp1.execute-api.us-east-1.amazonaws.com/Dev/',
+        getWorkspaceUsersById : 'projects/usersbytenant'
+    },
     dock : {
         getAllWorkspaces : 'https://f1amjmy8ki.execute-api.us-east-1.amazonaws.com/Dev/docks'
     },
     tasks : {
         getAllTasks : 'https://9n14mjxxz8.execute-api.us-east-1.amazonaws.com/Dev/tasks',
         toggleTaskFavourite : 'https://9n14mjxxz8.execute-api.us-east-1.amazonaws.com/Dev/taskaddtofavorites/',
-        updateTask : 'https://9n14mjxxz8.execute-api.us-east-1.amazonaws.com/Dev/task/'
+        updateTask : 'https://9n14mjxxz8.execute-api.us-east-1.amazonaws.com/Dev/task/',
+        getTasksByAssignee: 'https://9n14mjxxz8.execute-api.us-east-1.amazonaws.com/Dev/taskbyassignee/'
     }
 };
 const URLs_prod = {

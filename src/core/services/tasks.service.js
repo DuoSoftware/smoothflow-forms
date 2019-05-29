@@ -6,6 +6,9 @@ const TaskService = {
     getAllTasks: () => {
         return axios.get(URLs.tasks.getAllTasks)
     },
+    getTasksByAssignee: (assignee) => {
+        return axios.get(URLs.tasks.getTasksByAssignee + assignee)
+    },
     getUserSettings: (url) => {
         return axios.get(url)
     },
@@ -14,6 +17,9 @@ const TaskService = {
     },
     updateTask: (id, item) => {
         return axios.put(URLs.tasks.updateTask + id, item);
+    },
+    executeControl: (url, payload) => {
+        return axios.post(url, payload);
     }
 };
 

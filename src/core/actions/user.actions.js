@@ -15,3 +15,9 @@ export const SignOut = user => ({
     type: 'SIGNOUT',
     user
 });
+
+export const WorkspaceUsers = users => ({
+    category: 'AUTH',
+    type: 'GET_WORKSPACE_USERS',
+    users
+});

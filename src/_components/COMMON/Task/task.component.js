@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './task.scss'
-import {ActiveForm, InjectTask, LoadedForms, OpenTasks} from "../../../core/actions";
+import {ActiveForm, InjectTask, LoadedForms, OpenTasks, TasksFullwidth} from "../../../core/actions";
 import { connect } from 'react-redux';
 import {Button, Preloader} from "../";
 import $ from 'jquery';
@@ -66,6 +66,7 @@ class Task extends Component {
                 this.props.dispatch(ActiveForm(notif, null));
                 this.props.dispatch(OpenTasks(false));
                 this.props.dispatch(LoadedForms(fgs));
+                this.props.dispatch(TasksFullwidth(false));
             }
         }
     };
@@ -159,10 +160,10 @@ class Task extends Component {
                 </div>
                 <div className="sf-task-footer">
                     <div className="sf-task-assignee">
-                        <span>From: <b>{this.props.item.assigner}</b></span>
+                        <span>From: <b title={this.props.item.assigner}>{this.props.item.assigner}</b></span>
                     </div>
                     <div className="sf-task-assign-to">
-                        <span>To: <b>{this.props.item.assigner}</b></span>
+                        <span>To: <b title={this.props.item.assigner}>{this.props.item.assignee}</b></span>
                     </div>
                     {/*{*/}
                         {/*this.props.item.review_status !== 'STARTED' && this.props.item.assignee !== this.props.user.username*/}

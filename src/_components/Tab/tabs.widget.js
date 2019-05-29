@@ -99,7 +99,7 @@ class Tabs extends Component {
         if(children[activeTabIndex]) {
             return this.props.children.map((child, i) =>
                 child.props.children.type === 'task'
-                ?   <TaskView task={child.props.children} />
+                ?   <TaskView className={i === activeTabIndex ? 'sf-formview-show' : ''} task={child.props.children} id={child.props.children._id} />
                 :   <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
             )
         }

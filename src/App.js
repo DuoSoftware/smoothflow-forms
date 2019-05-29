@@ -7,7 +7,7 @@ import Body from "./_shell/body/sf_tf.body";
 import Formview from "./_containers/formview/sf_tf.formview.container";
 import {
     InjectNotification, InjectTask, LoadForm, OpenGlobalNotifConnection, PreloadShell, SignIn, TasksIotClient, Tokens,
-    User
+    User, WorkspaceUsers
 } from "./core/actions";
 import {KEY, UIHelper, UserService} from "./core/services";
 import URLs from "./core/_urls_";
@@ -19,7 +19,7 @@ import {Message} from "./_components/COMMON/Message/message";
 import AWS from 'aws-sdk'
 import config from './config/_awsconfig'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
-import toastr from 'react-redux-toastr';
+import { toastr } from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
 import openSocket from 'socket.io-client';
 // const socket = openSocket('http://smoothflow.herokuapp.com');
@@ -87,7 +87,7 @@ class App extends Component {
                             this.props.dispatch(User(profile.data.Result));
                             this.props.dispatch(SignIn(true));
 
-                            this.continueIoTConfig(_ses.idToken.jwtToken);
+                            this.continueIoTConfig(_ses.idToken.jwtToken, _ses.idToken.payload.email);
                             // const company = _ses.idToken.jwtToken;
                             // const host = 'dev.smoothflow.io';   //window.location.host;
                             //
@@ -102,11 +102,21 @@ class App extends Component {
                             //         this.props.dispatch(User(profile.data.Result));
                             //     });
 
+                            UserService.getWorkspaceUsersById(profile.data.Result.tenant)
+                                .then(users=> {
+                                    if (users.data.IsSuccess) {
+                                        this.props.dispatch(WorkspaceUsers(users.data.Result));
+                                    }
+                                })
+                                .catch(userse=> {
+                                    debugger
+                                })
                         }
                     })
                     .catch(errorRes => {
                         this.props.dispatch(PreloadShell(false));
                     });
+
             })
             .catch(eres => {
                 debugger
@@ -203,14 +213,13 @@ class App extends Component {
         // });
     };
     attachPrincipalPolicy(policyName, principal) {
-        debugger
         new AWS.Iot().attachPrincipalPolicy({ policyName: policyName, principal: principal }, function (err, data) {
             if (err) {
-                console.log(err, err.stack);
+                debugger
             }
         });
     }
-    continueIoTConfig(login) {
+    continueIoTConfig(login, email) {
         const _self = this;
         Amplify.Auth.currentCredentials().then(res=>{
             AWS.config.region = config.awsRegion;
@@ -226,20 +235,17 @@ class App extends Component {
                 if (error) {
                     debugger
                 } else {
-                    debugger
                     this.attachPrincipalPolicy("Server", res._identityId);
                     let options = {
                         accessKeyId: res.accessKeyId,
                         secretKey: res.data.Credentials.SecretKey,
                         sessionToken: res.sessionToken
                     };
-                    debugger;
                     let iotClient = new IoTClient(options);
 
                     iotClient.onConnect(function (err) {
-                        debugger;
                         console.log('connected.');
-                        iotClient.subscribe('myTopic');
+                        iotClient.subscribe(email);
                         // iotClient.publish('other/bina', "{'message':'Formss'}");
                     });
                     iotClient.onConnectionError(function (err) {
@@ -343,7 +349,16 @@ class App extends Component {
                     description: message.data.assignee + " has changed the status of " + message.data.name + " to " + message.data.status
                 }
                 this.props.dispatch(InjectNotification(notif));
-                // toastr.info("Task Update", message.data.assignee + " has changed the status of " + message.data.name + " to " + message.data.status);
+                toastr.info("Task Update", message.data.message);
+                break;
+
+            default :
+                const notif_ = {
+                    name: message.name,
+                    description: message.data
+                };
+                this.props.dispatch(InjectNotification(notif_));
+                toastr.info(message.name, message.data);
                 break;
         }
     }

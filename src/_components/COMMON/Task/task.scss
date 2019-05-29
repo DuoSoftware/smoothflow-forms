@@ -54,9 +54,29 @@
     justify-content: flex-start;
     .sf-task-assignee {
       flex: 1;
+      span {
+        display: flex;
+        b {
+          margin-left: 6px;
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100px;
+        }
+      }
     }
     .sf-task-assign-to {
       flex: 1;
+      span {
+        display: flex;
+        b {
+          margin-left: 6px;
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100px;
+        }
+      }
     }
     .sf-task-favourite {
       position: relative;
