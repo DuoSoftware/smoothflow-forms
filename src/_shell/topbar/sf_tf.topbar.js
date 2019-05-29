@@ -88,15 +88,34 @@ class TopBar extends Component {
                         task.type = "task";
                         task.locked = false;
 
-                        if(task.assignee !== this.props.user.username) {
-                            if (task.review_status === 'STARTED') {
-                                task.locked = true;
-                            }
-                        }
+                        // if(task.assignee !== this.props.user.username) {
+                        //     if (task.review_status === 'STARTED') {
+                        //         task.locked = true;
+                        //     }
+                        // }
                     });
-                    // const grouped = _.groupBy(tasks.data.Result, function(task) {
-                    //     return task.favourite ? 'favourites' : 'general';
-                    // });
+                    tasks.data.Result = [{
+                        "type": 'task',
+                        "task_name": 'Task 1',
+                        "form_name" : 'Task 1',
+                        "form_id" : '',
+                        "assigner" : 'newinurula@techno5.club',
+                        "assignee" : 'newinurula@techno5.club',
+                        "review_status": "OPEN",
+                        "raw_data": {
+                            "Link" : '',
+                            "comments": [{
+                                comment: 'Assigning this task to Wasantha',
+                                name: 'John Doe',
+                                time: '2019/05/20'
+                            }, {
+                                comment: 'Will attend to this asap',
+                                name: 'Wasantha',
+                                time: '2019/05/20'
+                            }]
+                        },
+                        "description": 'This is a test description'
+                    }];
                     this.props.dispatch(PreloadNotifications(false));
                     this.props.dispatch(InjectTask(tasks.data.Result));
                 })

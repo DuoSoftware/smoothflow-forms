@@ -164,15 +164,15 @@ class Task extends Component {
                     <div className="sf-task-assign-to">
                         <span>To: <b>{this.props.item.assigner}</b></span>
                     </div>
-                    {
-                        this.props.item.review_status !== 'STARTED' && this.props.item.assignee !== this.props.user.username
-                        ?   <div className="sf-task-assign-to">
-                                <Button className="sf-checkout-button sf-button sf-button-xsmall sf-button-secondary">
-                                    Start
-                                </Button>
-                            </div>
-                        :   null
-                    }
+                    {/*{*/}
+                        {/*this.props.item.review_status !== 'STARTED' && this.props.item.assignee !== this.props.user.username*/}
+                        {/*?   <div className="sf-task-assign-to">*/}
+                                {/*<Button className="sf-checkout-button sf-button sf-button-xsmall sf-button-secondary">*/}
+                                    {/*Start*/}
+                                {/*</Button>*/}
+                            {/*</div>*/}
+                        {/*:   null*/}
+                    {/*}*/}
                     <div
                         className={`sf-task-fav-icon sf-task-favourite${this.props.item.is_favorite ? ' sf-task-favourite-on' : ''}`}>
                         {

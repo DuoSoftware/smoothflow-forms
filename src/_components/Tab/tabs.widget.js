@@ -8,6 +8,7 @@ import {createStore} from "redux";
 import rootReducer from "../../core/reducers";
 import IoTClient from "../../core/lib/iot-client";
 import Formview from "../../_containers/formview/sf_tf.formview.container";
+import TaskView from "../../_containers/tasks/taskview.container";
 
 const store = createStore(rootReducer);
 
@@ -97,7 +98,9 @@ class Tabs extends Component {
 
         if(children[activeTabIndex]) {
             return this.props.children.map((child, i) =>
-                <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
+                child.props.children.type === 'task'
+                ?   <TaskView task={child.props.children} />
+                :   <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
             )
         }
     }

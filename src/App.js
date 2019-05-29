@@ -23,7 +23,28 @@ import toastr from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
 import openSocket from 'socket.io-client';
 // const socket = openSocket('http://smoothflow.herokuapp.com');
-import Amplify from 'aws-amplify'
+import Amplify, { PubSub } from 'aws-amplify'
+import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
+import ampconfig from './core/lib/AWS_COG_CONFIG_COMMON__';
+import ampconfigprod from './core/lib/AWS_COG_CONFIG_COMMON__PROD';
+
+awsc = null;
+if (window.location.hostname == "localhost" ||
+    window.location.hostname == "dev.smoothflow.io" ||
+    window.location.hostname == "smoothflow-dev.s3-website-us-east-1.amazonaws.com" ||
+    window.location.hostname == "d35ie0dhlww2mo.cloudfront.net") {
+    awsc = ampconfig;
+} else if (window.location.hostname == "smoothflow.io" ||
+    window.location.hostname == "prod.smoothflow.io" ||
+    window.location.hostname == "d3ored5mvntnxi.cloudfront.net") {
+    awsc = ampconfigprod;
+}
+
+
+Amplify.addPluggable(new AWSIoTProvider({
+    aws_pubsub_reagion: awsc.Auth.region,
+    aws_pubsub_endpoint: ''
+}));
 
 function TabContainer(props) {
     return (

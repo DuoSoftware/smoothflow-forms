@@ -1,0 +1,72 @@
+@import "../../core/styles/variables";
+
+.sf-task-view {
+  form {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 1px 10px #00000020;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    .sf-task-view-header {
+      display: flex;
+      align-items: center;
+      .sf-task-view-title {
+        margin-top: 0;
+        flex: 1;
+      }
+      .sf-task-status {
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-block;
+        padding: $sf-spacing-inner-third - 3 $sf-spacing-inner-third + 2;
+        background: $sf-color-status-private;
+        border-radius: $sf-border-radius-primary;
+        color: #ffffff;
+        margin-bottom: 20px;
+        &.task-INQUEUE {
+          background: $sf-color-status-private;
+        }
+        &.task-STARTED {
+          background: $sf-color-status-pending;
+        }
+      }
+    }
+
+    .sf-task-view-content {
+      margin-bottom: 30px;
+    }
+
+    .sf-task-view-comments {
+      .-new-comment {
+        width: 100%;
+        margin-top: 20px;
+        textarea {
+          outline: none;
+          padding: 10px;
+          box-sizing: border-box;
+          width: 100%;
+          height: 100px;
+          border: solid 1px #eee;
+          background: #fafafa;
+          border-radius: 5px;
+          margin-top: 5px;
+        }
+      }
+    }
+
+    .sf-task-view-actions {
+      align-items: center;
+      display: flex;
+      .-reasign-to {
+        display: flex;
+        flex: 1;
+        .css-2b097c-container {
+          width: 250px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

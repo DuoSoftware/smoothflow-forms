@@ -9,6 +9,8 @@ import Wrap from "../../_components/COMMON/Wrap/_wrap";
 import {Divider} from "../../_components/COMMON/Divider/divider.component";
 import IoTClient from "../../core/lib/iot-client";
 import _ from "lodash";
+import TasksContainer from "../../_containers/tasks/tasks.container";
+import NotificationsContainer from "../../_containers/notifications/notifications.container";
 
 class Body extends Component {
 
@@ -32,7 +34,7 @@ class Body extends Component {
                 <div className={`sf-notifications ${this.props.tasks.tasks_open || this.props.notifications.notifications_open ? 'sf-notifications-opened' : ''} ${this.props.tasks.task_fullwidth ? 'sf-notifications-full' : ''}`}>
                     {
                         this.props.tasks.tasks_open
-                        ?   <div className={`sf-flexbox-row sf-flex-center`} style={ {'marginBottom': '15px'} }>
+                        ?   <div className={`sf-flexbox-row sf-flex-center`} style={ {'marginBottom': '15px', 'position': 'relative', 'zIndex': 1} }>
                                 <h2 className="sf-flex-1" style={{'margin':0}}>Tasks</h2>
                                 {
                                     this.props.tasks.task_fullwidth ? <Button className="sf-button sf-button-circle" onClick={ (e) => this.tasksAll(e, false)}><span className="sf-icon icon-sf_ico_close_circle"></span></Button> : <Button className="sf-tasks-showall sf-button sf-button-xsmall" onClick={ (e) => this.tasksAll(e, true)}>Show All</Button>
@@ -44,33 +46,12 @@ class Body extends Component {
                         this.props.tasks.tasks_open
                         ?   this.props.uihelper._preload_notif_
                             ?   <Preloader type={'BODY'} />
-                            :   this.props.tasks.all_tasks.length
-                                ?   <Wrap>
-                                        { this.props.tasks.tasks.favourites.length ? <h4>Favourites</h4> : null }
-
-                                        {
-                                            this.props.tasks.tasks.favourites.map(task =>
-                                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                                            )
-                                        }
-                                        <Divider></Divider>
-                                        {
-                                            this.props.tasks.tasks.general.map(task =>
-                                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                                            )
-                                        }
-                                    </Wrap>
-                                :   <Message>No task has been found</Message>
-
+                            :   <TasksContainer tasks={this.props.tasks}/>
                         :
                         this.props.notifications.notifications_open
                         ?   this.props.uihelper._preload_notif_
                             ?   <Preloader type={'BODY'} />
-                            :   this.props.notifications.notifications.length
-                                ?   this.props.notifications.notifications.map(task =>
-                                        <Notification key={KEY()} item={task}/>
-                                    )
-                                :   <Message>No notification has been found</Message>
+                            :   <NotificationsContainer notifications={this.props.notifications}/>
                         :   null
                     }
                 </div>

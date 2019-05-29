@@ -1,0 +1,34 @@
+@import "../../../core/styles/variables";
+
+.sf-comment {
+  margin-bottom: 10px;
+  .sf-image-box {
+    display: flex;
+    align-items: center;
+    .sf-comment-user {
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      padding: 5px;
+      background: $sf-color-primary-light;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: $sf-color-primary;
+      margin-right: 10px;
+    }
+    h4 {
+      flex: 1;
+      color: #00000097;
+    }
+  }
+  .sf-comment-body {
+    p {
+      margin-top: 0;
+      color: #00000097;
+    }
+  }
+}

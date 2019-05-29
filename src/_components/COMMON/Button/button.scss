@@ -14,12 +14,13 @@
   background: #fff;
   height: $sf-controls-height;
   border: none;
-  padding: ($sf-spacing-inner-primary - 2) $sf-spacing-inner-primary + 10;
+  padding: ($sf-spacing-inner-secondary - 2) $sf-spacing-inner-primary + 10;
   border-radius: 100px;
   font-weight: bold;
   cursor: pointer;
   outline: none;
   white-space: nowrap;
+  font-size: 12px;
   text-decoration: inherit;
   -webkit-transition: background $sf-animation-time;
   -moz-transition: background $sf-animation-time;
