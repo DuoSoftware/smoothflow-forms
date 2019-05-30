@@ -13,7 +13,7 @@ const Formview = props =>
                     </Wrap>
                 :
             props.type === 'app'
-                ?   <ChatComponent _id={props.id}/>
+                ?   null
                 :   <iframe id="app" width="100%" height="100%" frameBorder="0" src={ props.form }></iframe>
         }
     </div>
