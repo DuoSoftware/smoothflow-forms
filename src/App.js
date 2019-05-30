@@ -245,14 +245,14 @@ class App extends Component {
 
                     iotClient.onConnect(function (err) {
                         console.log('connected.');
-                        iotClient.subscribe(email);
+                        iotClient.subscribe('notifications/'+email);
                         // iotClient.publish('other/bina', "{'message':'Formss'}");
                     });
                     iotClient.onConnectionError(function (err) {
                         debugger;
                     });
                     iotClient.onMessageReceived(function(topic, message) {
-                        debugger
+                        // debugger
                         console.log(topic, message);
                         const msg = JSON.parse(message);
                         _self.notificationsManager(topic, msg);

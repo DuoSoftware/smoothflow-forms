@@ -9,6 +9,7 @@ import Select from 'react-select'
 import Timer from 'react-compound-timer'
 import Wrap from "../../_components/COMMON/Wrap/_wrap";
 import { toastr } from 'react-redux-toastr'
+import {LoadedForms} from "../../core/actions";
 
 class TaskView extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class TaskView extends Component {
     };
     handleReassign(user, url, action, self) {
         debugger
-        self.setState(s=> ({
+        this.setState(s=> ({
             ...s,
             reassignTo: user
         }));
@@ -86,53 +87,60 @@ class TaskView extends Component {
 
     executeTask(e, url, action) {
         if(e)e.preventDefault();
-        this.setState(s=>({...s, loading: true}));
         const payload = {};
         const P = JSON.parse(this.state.task.raw_data.RawData3.replace(/'/g, '"'));
         for(let p of P) {
             payload[p] = null;
         };
 
-        if (payload.hasOwnProperty('InSessionID')) payload.InSessionID = UIHelper.UUID();
+        // if (payload.hasOwnProperty('InSessionID')) payload.InSessionID = UIHelper.UUID();
+        if (payload.hasOwnProperty('InSessionID')) payload.InSessionID = this.state.task.raw_data.RawData5;
         if (payload.hasOwnProperty('TaskAction')) payload.TaskAction = action;
         if (payload.hasOwnProperty('SessionData')) payload.SessionData = "{}";
         payload['typeform_payload'] = "{}";
         if (action === 'Reassign') {
             if (this.state.reassignTo) {
                 payload['TaskData'] = this.state.reassignTo.value;
+            } else {
+                payload['TaskData'] = "";
             }
         } else {
             payload['TaskData'] = "";
         }
 
 
-        TaskService.executeControl(url, payload)
-            .then(res=> {
-                debugger
-                if (res.data.IsSuccess) {
-                    this.updateTask(action);
-                } else {
+        debugger
+        // if (action !== 'Reassign' || this.state.reassignTo) {
+            this.setState(s=>({...s, loading: true}));
+            TaskService.executeControl(url, payload)
+                .then(res=> {
+                    if (res.statusText == 'OK') {
+                        this.updateTask(action);
+                    } else {
+                        this.setState(s=>({...s, loading: false}));
+                        toastr.error(this.state.task.form_name, "Failed to update task. Please try again later.");
+                    }
+                })
+                .catch(res=>{
                     this.setState(s=>({...s, loading: false}));
                     toastr.error(this.state.task.form_name, "Failed to update task. Please try again later.");
-                }
-            })
-            .catch(res=>{
-                this.setState(s=>({...s, loading: false}));
-                toastr.error(this.state.task.form_name, "Failed to update task. Please try again later.");
-            })
-
-        // Update task
-        
+                })
+        // }
     }
 
     updateTask(action) {
         const _payload = {...this.state.task};
         if (action === 'Approve') {
-            _payload.state = 'INPROGRESS';
+            _payload.review_status = 'INPROGRESS';
         };
+        if (action === 'Reassign') {
+            debugger
+            _payload.assignee = this.state.reassignTo.value;
+        }
         TaskService.updateTask(this.state.task._id, _payload)
             .then(res=> {
                 if (res.data.IsSuccess) {
+                    if (action === 'Reassign') this.closeTab();
                     this.setState(s=>({...s, loading: false}));
                     toastr.success(this.state.task.form_name, "Task has been updated successfully");
                 } else {
@@ -145,6 +153,14 @@ class TaskView extends Component {
                 toastr.error(this.state.task.form_name, "Failed to update task. Please try again later.");
             })
     }
+
+    closeTab = () => {
+        debugger
+        const at = this.props.form.active_form;
+        let loaded_tabs = [...this.props.form.loaded_forms];
+        loaded_tabs.splice(at, 1);
+        this.props.dispatch(LoadedForms(loaded_tabs));
+    };
 
     render() {
         const _self = this;
@@ -346,6 +362,7 @@ class TaskView extends Component {
 }
 
 const mapStateToProps=s=>({
-    user: s.user
+    user: s.user,
+    form: s.form
 });
 export default (connect(mapStateToProps))(TaskView);

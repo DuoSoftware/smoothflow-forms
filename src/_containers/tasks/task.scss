@@ -103,8 +103,14 @@
                   }
                 }
                 span {
-                  flex: 1;
+                  //flex: 1;
                   color: #00000097;
+                  width: 180px;
+                  display: inline-block;
+                  height: 20px;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
                 }
                 i.material-icons {
                   font-size: 15px;
