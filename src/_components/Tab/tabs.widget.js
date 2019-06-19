@@ -9,6 +9,7 @@ import rootReducer from "../../core/reducers";
 import IoTClient from "../../core/lib/iot-client";
 import Formview from "../../_containers/formview/sf_tf.formview.container";
 import TaskView from "../../_containers/tasks/taskview.container";
+import ChatComponent from "../ChatComponent/index_old";
 
 const store = createStore(rootReducer);
 
@@ -32,7 +33,8 @@ class Tabs extends Component {
                 if(left === 0){
                     debugger
                     // this.resetScrollButtons('left');
-                } else {
+                }
+                else {
                     // this.resetScrollButtons(null)
                 }
             });
@@ -46,7 +48,8 @@ class Tabs extends Component {
                 if(right === 0){
                     debugger
                     // this.resetScrollButtons('right');
-                } else {
+                }
+                else {
                     // this.resetScrollButtons(null)
                 }
             });
@@ -96,11 +99,14 @@ class Tabs extends Component {
         const {activeTabIndex} = this.state;
         const {children} = this.props;
 
-        if(children[activeTabIndex]) {
+        if (children[activeTabIndex]) {
             return this.props.children.map((child, i) =>
                 child.props.children.type === 'task'
                 ?   <TaskView className={i === activeTabIndex ? 'sf-formview-show' : ''} task={child.props.children} id={child.props.children._id} />
-                :   <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type}/>
+                :
+                child.props.children.type === 'app'
+                ?   <ChatComponent app={child.props.children.app_key} id={child.props.children._id} />
+                :   <Formview className={i === activeTabIndex ? 'sf-formview-show' : ''} id={child.props.children._id} form={child.props.children.form_link} type={child.props.children.type} />
             )
         }
     }

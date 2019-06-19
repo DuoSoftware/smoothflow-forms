@@ -13,28 +13,28 @@ class TasksContainer extends Component {
         return (
             this.props.tasks.all_tasks.length
                 ?   <Wrap>
-                    { this.props.tasks.tasks.favourites.length ? <h4>Favourites</h4> : null }
+                        { this.props.tasks.tasks.favourites.length ? <h4>Favourites</h4> : null }
 
-                    {
-                        this.props.tasks.tasks.favourites.map(task =>
-                            <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                        )
-                    }
-                    <Divider></Divider>
-                    <h4>Created Tasks</h4>
-                    {/*{*/}
-                        {/*this.props.tasks.tasks.general.map(task =>*/}
-                            {/*<Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>*/}
-                        {/*)*/}
-                    {/*}*/}
-                     - none -
-                    <h4>Received Tasks</h4>
-                    {
-                        this.props.tasks.tasks.general.map(task =>
-                            <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
-                        )
-                    }
-                </Wrap>
+                        {
+                            this.props.tasks.tasks.favourites.map(task =>
+                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
+                            )
+                        }
+                        <Divider></Divider>
+                        <h4>Created Tasks</h4>
+                        {/*{*/}
+                            {/*this.props.tasks.tasks.general.map(task =>*/}
+                                {/*<Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>*/}
+                            {/*)*/}
+                        {/*}*/}
+                         - none -
+                        <h4>Received Tasks</h4>
+                        {
+                            this.props.tasks.tasks.general.map(task =>
+                                <Task className={this.props.tasks.task_fullwidth ? 'sf-task-full' : ''} key={KEY()} item={task}/>
+                            )
+                        }
+                    </Wrap>
                 :   <Message>No task has been found</Message>
         )
     }

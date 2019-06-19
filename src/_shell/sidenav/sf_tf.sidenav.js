@@ -165,34 +165,6 @@ class Sidenav extends Component {
         }
         if(!alreary_loaded) {
             fgs.push(form);
-            let iotClient = new IoTClient(this.props.notifications.tokens);
-            iotClient.onConnect(function () {
-                debugger
-                const id = form.form_link.split('/').pop();
-                iotClient.subscribe('forms/' + id);
-                const data = {
-                    "topic": "forms/" + id,
-                    "data": {
-                        "name" : form.form_name,
-                        "data" : id
-                    }
-                };
-                // iotClient.publish('forms/' + id, JSON.stringify(data));
-            });
-            const _self = this;
-            iotClient.onMessageReceived(function(topic, message) {
-                debugger
-                const parsed = JSON.parse(message.replace(/\r?\n|\r/, ''));
-                let active_form = _self.props.form.active_form;
-                const active_form_link = _self.props.form.active_form.form_link;
-                const _i = active_form_link.lastIndexOf("/");
-                const link_prefix = active_form_link.substring(0, _i+1);
-                active_form.form_link = link_prefix + parsed.data;
-                _self.props.dispatch(ActiveForm(active_form, null));
-            });
-            iotClient.onConnectionError(function () {
-                // debugger;
-            });
         }
         this.props.dispatch(ActiveForm(form, null));
         this.props.dispatch(LoadedForms(fgs));

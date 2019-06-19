@@ -21,12 +21,13 @@ import config from './config/_awsconfig'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import { toastr } from 'react-redux-toastr';
 import ReduxToastr from 'react-redux-toastr'
-import openSocket from 'socket.io-client';
 // const socket = openSocket('http://smoothflow.herokuapp.com');
 import Amplify, { PubSub } from 'aws-amplify'
 import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import ampconfig from './core/lib/AWS_COG_CONFIG_COMMON__';
 import ampconfigprod from './core/lib/AWS_COG_CONFIG_COMMON__PROD';
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://testing-smoothflow.herokuapp.com');
 
 let awsc = null;
 if (window.location.hostname == "localhost" ||
@@ -83,11 +84,13 @@ class App extends Component {
                         if (profile.data.IsSuccess) {
                             profile.data.Result.given_name = _sesuser.given_name;
                             profile.data.Result.family_name = _sesuser.family_name;
+                            profile.data.Result._ses = _sesuser;
                             this.props.dispatch(PreloadShell(false));
                             this.props.dispatch(User(profile.data.Result));
                             this.props.dispatch(SignIn(true));
 
-                            this.continueIoTConfig(_ses.idToken.jwtToken, _ses.idToken.payload.email);
+                            // this.continueIoTConfig(_ses.idToken.jwtToken, _ses.idToken.payload.email);
+
                             // const company = _ses.idToken.jwtToken;
                             // const host = 'dev.smoothflow.io';   //window.location.host;
                             //
@@ -127,90 +130,9 @@ class App extends Component {
             this.props.dispatch(LoadForm('https://kasun7.typeform.com/to/' + formID));
         }
 
-        /* AWS - IoT
-        ================================================================== */
-        // const tokens = AWS.config.credentials;
-        // const _self = this;
-        //
-        // // cognito-idp.us-east-1.amazonaws.com/us-east-1_J98Pa2dIT
-        // function attachPrincipalPolicy(policyName, principal) {
-        //     new AWS.Iot().attachPrincipalPolicy({ policyName: policyName, principal: principal }, function (err, data) {
-        //         if (err) {
-        //             // console.error(err); // an error occurred
-        //         }
-        //     });
-        // }
-        //
-        // //Generate loginKey
-        // const userPool = new CognitoUserPool({
-        //     UserPoolId: config.cognito.awsCognitoUserPoolId,
-        //     ClientId: config.cognito.awsCognitoUserPoolAppClientId,
-        //     Storage: new CookieStorage({
-        //         secure: false,
-        //         domain: "localhost"
-        //     })
-        // });
-        // function getLoginKey() {
-        //     const session = null;
-        //     if(userPool) {
-        //         const currentUser = userPool.getCurrentUser();
-        //         if(currentUser) {
-        //             return currentUser.getSession(function(err, session) {
-        //                 return session.getIdToken().getJwtToken();
-        //             });
-        //         }
-        //     }
-        // }
-        //
-        // let login = {};
-        // AWS.config.region = config.awsRegion;
-
-        // const session = getLoginKey();
-        // const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
-        // login[loginKey] = session;
-        //
-        // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        //     IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
-        //     Logins: login
-        // });
-        //
-        // AWS.config.credentials.refresh((error) => {
-        //     if (error) {
-        //         debugger
-        //     } else {
-        //         // attachPrincipalPolicy("Server", AWS.config.credentials.identityId);
-        //         let options = {
-        //             accessKeyId: AWS.config.credentials.accessKeyId,
-        //             secretKey: AWS.config.credentials.secretAccessKey,
-        //             sessionToken: AWS.config.credentials.sessionToken
-        //         };
-        //         // debugger;
-        //         let iotClient = new IoTClient(options);
-        //
-        //         iotClient.onConnect(function () {
-        //             debugger;
-        //             console.log('connected.');
-        //             iotClient.subscribe('tasks');
-        //             // iotClient.publish('other/bina', "{'message':'Formss'}");
-        //         });
-        //         iotClient.onConnectionError(function () {
-        //             debugger;
-        //         });
-        //         iotClient.onMessageReceived(function(topic, message) {
-        //             debugger
-        //             console.log(topic, message);
-        //             const msg = JSON.parse(message);
-        //             _self.notificationsManager(topic, msg);
-        //         });
-        //         /* --------------------------------------------------------------- */
-        //     }
-        // });
-
-        // PubSub.subscribe('myTopic').subscribe({
-        //     next: data => console.log('Message received', data),
-        //     error: error => console.error(error),
-        //     close: () => console.log('Done'),
-        // });
+        socket.on("connect", () => {
+            console.log("socket connected")
+        })
     };
     attachPrincipalPolicy(policyName, principal) {
         new AWS.Iot().attachPrincipalPolicy({ policyName: policyName, principal: principal }, function (err, data) {
