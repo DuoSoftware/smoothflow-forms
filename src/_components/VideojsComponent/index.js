@@ -35,11 +35,6 @@ export default class VideoPlayer extends React.Component {
         streamAdd: this.state.streamAdd + 1,
         streamName: this.state.streamName + this.state.streamAdd
       })
-      AWS.config.update({
-        accessKeyId: 'AKIAIRYL4J33WU77WUCA',
-        secretAccessKey: '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',
-        region: 'us-east-1',
-      })
       const kinesisvideo = new AWS.KinesisVideo();
       const params = {
         StreamName: this.state.streamName, /* required */
