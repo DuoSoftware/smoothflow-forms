@@ -16,7 +16,6 @@ class ChatComponent extends Component {
 
     componentDidMount() {
         // let { id } = this.props.match.params;
-        debugger
         let id = this.props.id;
         socket.on(id, (data) => {
             let msgs = this.state.chat;

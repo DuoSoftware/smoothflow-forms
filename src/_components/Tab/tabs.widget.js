@@ -31,7 +31,6 @@ class Tabs extends Component {
             $("#sf-tabs-slider").animate({scrollLeft: leftPos - 90}, 300, function () {
                 const left = $('#sf-tabs-slider').scrollLeft();
                 if(left === 0){
-                    debugger
                     // this.resetScrollButtons('left');
                 }
                 else {
@@ -59,7 +58,7 @@ class Tabs extends Component {
     componentDidUpdate() {
         const form = this.props.form.active_form;
         const i = this.props.form.loaded_forms.indexOf(form);
-        if(this.state.activeTabIndex !== i) {
+        if (this.state.activeTabIndex !== i) {
             // debugger
             this.handleTabClick(i);
         }
@@ -77,11 +76,12 @@ class Tabs extends Component {
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
+        if (this.state.activeTabIndex === undefined) this.handleTabClick(0);
         return React.Children.map(this.props.children, (child, index) => {
             return React.cloneElement(child, {
                 onClick : this.handleTabClick,
                 tabIndex: index,
-                isActive: index === this.state.activeTabIndex
+                isActive: this.state.activeTabIndex === undefined ? true : index === this.state.activeTabIndex
             });
         });
     }

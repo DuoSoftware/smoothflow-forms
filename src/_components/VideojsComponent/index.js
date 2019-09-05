@@ -34,7 +34,7 @@ export default class VideoPlayer extends React.Component {
       this.setState({
         streamAdd: this.state.streamAdd + 1,
         streamName: this.state.streamName + this.state.streamAdd
-      })
+      });
       const kinesisvideo = new AWS.KinesisVideo();
       const params = {
         StreamName: this.state.streamName, /* required */
