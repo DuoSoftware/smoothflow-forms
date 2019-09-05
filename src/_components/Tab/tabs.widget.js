@@ -74,11 +74,12 @@ class Tabs extends Component {
 
     // Encapsulate <Tabs/> component API as props for <Tab/> children
     renderChildrenWithTabsApiAsProps() {
+        if (this.state.activeTabIndex === undefined) this.handleTabClick(0);
         return React.Children.map(this.props.children, (child, index) => {
             return React.cloneElement(child, {
                 onClick : this.handleTabClick,
                 tabIndex: index,
-                isActive: index === this.state.activeTabIndex
+                isActive: this.state.activeTabIndex === undefined ? true : index === this.state.activeTabIndex
             });
         });
     }
