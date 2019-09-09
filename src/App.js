@@ -28,7 +28,7 @@ import { AWSIoTProvider } from '@aws-amplify/pubsub/lib/Providers';
 import ampconfig from './core/lib/AWS_COG_CONFIG_COMMON__';
 import ampconfigprod from './core/lib/AWS_COG_CONFIG_COMMON__PROD';
 
-awsc = null;
+let awsc = null;
 if (window.location.hostname == "localhost" ||
     window.location.hostname == "dev.smoothflow.io" ||
     window.location.hostname == "smoothflow-dev.s3-website-us-east-1.amazonaws.com" ||
